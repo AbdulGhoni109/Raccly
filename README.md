@@ -1,16 +1,96 @@
-# React + Vite
+# 🦝 Raccly - Interactive English Learning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Raccly** adalah platform pembelajaran Bahasa Inggris interaktif yang dirancang dengan antarmuka modern, estetik, dan *game-like*. Raccly membantu siswa dan pembelajar menguasai **Vocabulary**, **Grammar**, dan **Reading** dengan cara yang menyenangkan, *scannable*, dan tidak membosankan.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Fitur Utama
 
-## React Compiler
+### 📚 1. Mode Vocabulary (Kosakata)
+- **Flashcard Mode**: Kartu interaktif 2 sisi dengan animasi flip 3D, petunjuk pelafalan, *dashed inner frame*, pagination dot windowing, dan fitur *Tandai Sudah Hafal*.
+- **Swipe Game Mode**: Mode geser cepat (*swipe right* jika sudah hafal, *swipe left* jika perlu diulang).
+- **Multiple Choice Quiz**: Kuis pilihan ganda interaktif dengan umpan balik (*feedback*) langsung dari maskot.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📊 2. Mode Grammar (Tata Bahasa)
+- **Card-Based Presentation**: Pembagian materi per section menjadi card-card visual terpisah.
+- **Grid Card Fungsi (2x2)**: Penyajian fungsi utama tenses dalam format grid card yang ringkas.
+- **Diagram Pattern Flow Pills**: Visualisasi rumus kalimat (`Subjek + Verb 1 + ...`) menjadi diagram pill visual yang mudah dipahami.
+- **Warning Card Kesalahan Umum**: Card peringatan khusus (*soft warm orange*) dengan perbandingan berdampingan `❌ Salah (Incorrect)` vs `✓ Benar (Correct)`.
+- **Progressive Disclosure (Accordion)**: Fitur buka-tutup detail untuk aturan panjang seperti *Irregular Verbs* dan aturan ejaan.
+- **Latihan Soal Grammar**: Kuis evaluasi pemahaman di akhir setiap materi.
 
-## Expanding the Oxlint configuration
+### 📖 3. Mode Reading (Membaca Cerita)
+- Koleksi cerita pendek bilingual (Bahasa Inggris & Bahasa Indonesia).
+- Kuis pemahaman bacaan di akhir cerita untuk menguji daya serap materi.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### 📈 4. Dashboard Progress & Statistik
+- Pantau persentase kosakata yang sudah dikuasai.
+- Pantau jumlah cerita yang telah dibaca.
+- Rata-rata nilai kuis Vocabulary dan Grammar.
+
+### 🦝 5. Maskot Interaktif (Raccly Host)
+- Maskot rakun pintar yang memberikan motivasi, petunjuk, dan respon secara dinamis sesuai halaman yang dibuka pengguna.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Core**: [React 19](https://react.dev/), [Vite 8](https://vitejs.dev/)
+- **Routing**: [React Router v7](https://reactrouter.com/)
+- **Styling**: [TailwindCSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **State & Storage**: React Context API & `localStorage` (dengan *backward compatibility fallback*).
+
+---
+
+## 🚀 Panduan Memulai (Local Setup)
+
+### 1. Clone Repositori
+```bash
+git clone https://github.com/AbdulGhoni109/Raccly.git
+cd Raccly
+```
+
+### 2. Install Dependensi
+```bash
+npm install
+```
+
+### 3. Jalankan Dev Server
+```bash
+npm run dev
+```
+Buka browser dan akses alamat yang tertera (biasanya `http://localhost:5173` atau `http://localhost:5176`).
+
+### 4. Build untuk Produksi
+```bash
+npm run build
+```
+
+---
+
+## 📁 Struktur Direktori
+
+```text
+Raccly/
+├── public/                # Asset statis & maskot
+├── src/
+│   ├── assets/            # Gambaran umum & vektor
+│   ├── components/        # Komponen modular (Vocabulary, Grammar, Reading, Mascot)
+│   ├── contexts/          # State global MascotContext
+│   ├── data/              # Dataset kosakata, grammar, dan cerita
+│   ├── hooks/             # Custom hook (useLocalStorage)
+│   ├── pages/             # Halaman utama (Vocabulary, Grammar, Reading, Dashboard)
+│   ├── App.jsx            # Routing & Layout utama
+│   ├── main.jsx           # Entrypoint React
+│   └── index.css          # Core CSS & Design System
+├── index.html             # HTML Shell
+└── package.json           # Dependensi & script proyek
+```
+
+---
+
+## 📄 Lisensi
+
+Hak Cipta © 2026 **Raccly Team**. Seluruh hak cipta dilindungi undang-undang.
