@@ -12,6 +12,8 @@ import MascotHost from './components/MascotHost';
 import { useEffect } from 'react';
 import { useMascot } from './contexts/MascotContext';
 
+import BackgroundClouds from './components/BackgroundClouds';
+
 function LandingPage() {
   const { setMascotMessage, hideMascot } = useMascot();
   
@@ -20,36 +22,10 @@ function LandingPage() {
   }, [hideMascot]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#B8C0FF] via-[#D5C6FE] to-[#EDE8FF] flex flex-col items-center justify-center p-6 text-slate-800 relative z-0 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#D8C7FF] via-[#E2DCFF] to-[#D0EAFF] flex flex-col items-center justify-center p-6 text-slate-800 relative z-0 overflow-hidden">
       
-      {/* Background Watermarks & Decorative Flowers */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        {/* Sunburst / Flower lineart patterns */}
-        <svg className="absolute -top-12 -left-12 w-96 h-96 opacity-15 text-white stroke-current" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="20" strokeWidth="1" />
-          {[...Array(12)].map((_, i) => (
-            <line key={i} x1="50" y1="50" x2={50 + 40 * Math.cos((i * Math.PI) / 6)} y2={50 + 40 * Math.sin((i * Math.PI) / 6)} strokeWidth="0.8" />
-          ))}
-        </svg>
-        <svg className="absolute top-1/3 -right-16 w-96 h-96 opacity-15 text-white stroke-current" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="25" strokeWidth="1" />
-          {[...Array(16)].map((_, i) => (
-            <line key={i} x1="50" y1="50" x2={50 + 42 * Math.cos((i * Math.PI) / 8)} y2={50 + 42 * Math.sin((i * Math.PI) / 8)} strokeWidth="0.8" />
-          ))}
-        </svg>
-        <svg className="absolute bottom-10 -left-10 w-80 h-80 opacity-15 text-white stroke-current" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="20" strokeWidth="1" />
-          {[...Array(12)].map((_, i) => (
-            <line key={i} x1="50" y1="50" x2={50 + 38 * Math.cos((i * Math.PI) / 6)} y2={50 + 38 * Math.sin((i * Math.PI) / 6)} strokeWidth="0.8" />
-          ))}
-        </svg>
-
-        {/* Floating Sparkles & Hearts */}
-        <div className="absolute top-[18%] left-[22%] text-white/30 text-xl font-bold">✨</div>
-        <div className="absolute top-[28%] right-[20%] text-purple-400/40 text-lg">💜</div>
-        <div className="absolute bottom-[25%] left-[15%] text-pink-300/40 text-lg">🌸</div>
-        <div className="absolute bottom-[35%] right-[18%] text-white/40 text-sm">✨</div>
-      </div>
+      {/* Subtle Background Clouds & Ambient Lights */}
+      <BackgroundClouds />
 
       <div className="max-w-xl w-full flex flex-col items-center text-center my-6">
         

@@ -34,6 +34,8 @@ import SwipeMode from '../components/vocabulary/SwipeMode';
 import QuizMode from '../components/vocabulary/QuizMode';
 import { useMascot } from '../contexts/MascotContext';
 
+import BackgroundClouds from '../components/BackgroundClouds';
+
 export default function Vocabulary() {
   const { setMascotMessage } = useMascot();
   const [vocabProgress] = useLocalStorage('raccly_vocab_progress', {});
@@ -207,23 +209,8 @@ export default function Vocabulary() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#D8C7FF] via-[#E2DCFF] to-[#D0EAFF] text-slate-800 p-4 sm:p-6 md:p-10 relative z-0 overflow-hidden">
       
-      {/* Background Watermark & Blobs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-5%] right-[-5%] w-[400px] h-[400px] bg-[#A78BFA] rounded-full opacity-20 blur-[90px]"></div>
-        <div className="absolute bottom-[-5%] left-[-5%] w-[450px] h-[450px] bg-[#38BDF8] rounded-full opacity-20 blur-[90px]"></div>
-        
-        {/* Sunburst Pattern */}
-        <svg className="absolute -top-10 -right-10 w-80 h-80 opacity-15 text-white stroke-current" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="20" strokeWidth="1" />
-          {[...Array(12)].map((_, i) => (
-            <line key={i} x1="50" y1="50" x2={50 + 38 * Math.cos((i * Math.PI) / 6)} y2={50 + 38 * Math.sin((i * Math.PI) / 6)} strokeWidth="0.8" />
-          ))}
-        </svg>
-
-        {/* Floating sparkles */}
-        <div className="absolute top-[15%] left-[10%] text-white/40 text-lg">✨</div>
-        <div className="absolute bottom-[20%] right-[12%] text-white/40 text-base">🌸</div>
-      </div>
+      {/* Background Watermark & Clouds */}
+      <BackgroundClouds />
 
       {/* Header & Navigation (Hidden during active FlashcardMode for 100% clean UI matching reference screenshot) */}
       {(!selectedMode || !selectedCategory || selectedMode !== 'flashcard') && (
