@@ -9,6 +9,7 @@ export default function ReadingQuiz({ questions, storyId }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isFinished, setIsFinished] = useState(false);
   const [readStories, setReadStories] = useLocalStorage('raccly_read_stories', {});
   const [readingScores, setReadingScores] = useLocalStorage('raccly_reading_scores', []);
 
