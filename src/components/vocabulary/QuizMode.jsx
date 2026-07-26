@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, Trophy, RefreshCcw, ArrowRight, HelpCircle } from 'lucide-react';
+import { CheckCircle, XCircle, Trophy, RefreshCcw, ArrowRight, HelpCircle, ChevronLeft } from 'lucide-react';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useMascot } from '../../contexts/MascotContext';
 
-export default function QuizMode({ vocabList }) {
+export default function QuizMode({ vocabList, onBack }) {
   const { setMascotMessage } = useMascot();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,7 +24,6 @@ export default function QuizMode({ vocabList }) {
 
     const shuffledVocab = [...vocabList].sort(() => 0.5 - Math.random());
     const generatedQuestions = shuffledVocab.map((vocab) => {
-      // Get 3 random wrong answers from the same list with distinct meanings
       const wrongOptions = vocabList
         .filter(v => v.meaning !== vocab.meaning)
         .sort(() => 0.5 - Math.random())
@@ -63,7 +62,7 @@ export default function QuizMode({ vocabList }) {
   const currentQ = questions[currentIndex];
 
   const handleAnswer = (option) => {
-    if (selectedAnswer !== null) return; // Prevent double clicking or changing answer
+    if (selectedAnswer !== null) return;
 
     setSelectedAnswer(option);
 
@@ -123,18 +122,33 @@ export default function QuizMode({ vocabList }) {
   return (
     <div className="max-w-xl mx-auto">
       
-      {/* Top Counter Bar */}
-      <div className="flex justify-between items-center mb-3 px-2">
-        <div className="bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/40 shadow-sm text-xs font-black text-indigo-950">
-          Soal <span className="text-purple-600">{currentIndex + 1}</span> dari {questions.length}
+      {/* Top Header Bar */}
+      <div className="w-full flex items-center justify-between gap-3 mb-2 px-1">
+        <button
+          onClick={onBack}
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center text-slate-700 shadow-md shadow-indigo-900/5 hover:bg-slate-50 transition-all border border-white/90 active:scale-95 flex-shrink-0"
+          title="Ganti Kelompok"
+        >
+          <ChevronLeft className="w-5 h-5 text-slate-700 stroke-[2.5]" />
+        </button>
+
+        <div className="flex flex-col items-center text-center min-w-0">
+          <span className="text-xs sm:text-sm font-extrabold text-slate-700 truncate max-w-[160px] sm:max-w-[220px]">
+            {currentQ.category || 'Kuis'}
+          </span>
+          <span className="text-xs font-black text-purple-700 tracking-tight">
+            Soal {currentIndex + 1} / {questions.length}
+          </span>
         </div>
-        <div className="bg-amber-400/20 backdrop-blur-md px-4 py-1.5 rounded-full border border-amber-400/30 text-xs font-extrabold text-amber-900">
-          ⭐ Skor: {score}
+
+        <div className="bg-amber-500 text-white font-extrabold text-xs px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm shadow-amber-500/20 flex-shrink-0">
+          <span>⭐</span>
+          <span>{score}</span>
         </div>
       </div>
       
       {/* Progress Bar */}
-      <div className="w-full bg-white/40 h-2 rounded-full mb-8 overflow-hidden border border-white/20">
+      <div className="w-full bg-white/70 h-2 rounded-full mb-4 overflow-hidden shadow-inner">
         <motion.div 
           className="bg-indigo-600 h-2 rounded-full"
           initial={{ width: 0 }}
@@ -144,7 +158,7 @@ export default function QuizMode({ vocabList }) {
       </div>
 
       {/* Question Card */}
-      <div className="bg-white/90 backdrop-blur-md p-8 rounded-[2.5rem] shadow-xl border border-white/80 text-center mb-6 relative overflow-hidden">
+      <div className="bg-white/90 backdrop-blur-md px-6 py-5 sm:p-8 rounded-[2.5rem] shadow-xl border border-white/80 text-center mb-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
         <span className="text-xs font-extrabold text-indigo-500 uppercase tracking-widest bg-indigo-100/80 px-3 py-1 rounded-full mb-3 inline-block">
@@ -161,7 +175,7 @@ export default function QuizMode({ vocabList }) {
       </div>
 
       {/* 4 Options */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {currentQ.options.map((option, idx) => {
           const isCorrectOption = option === currentQ.correctAnswer;
           const isSelectedOption = option === selectedAnswer;
@@ -172,15 +186,12 @@ export default function QuizMode({ vocabList }) {
 
           if (hasAnswered) {
             if (isCorrectOption) {
-              // Right answer turns Green (whether selected or not)
               optionStyle = "bg-emerald-500 text-white border-emerald-600 shadow-lg shadow-emerald-500/25 font-bold scale-[1.02]";
               icon = <CheckCircle className="w-6 h-6 text-white flex-shrink-0" />;
             } else if (isSelectedOption) {
-              // Selected wrong answer turns Red
               optionStyle = "bg-rose-500 text-white border-rose-600 shadow-lg shadow-rose-500/25 font-bold scale-[1.02]";
               icon = <XCircle className="w-6 h-6 text-white flex-shrink-0" />;
             } else {
-              // Unselected incorrect options fade out
               optionStyle = "bg-white/40 text-slate-400 border-white/20 opacity-50";
             }
           }
@@ -192,7 +203,7 @@ export default function QuizMode({ vocabList }) {
               whileTap={!hasAnswered ? { scale: 0.99 } : {}}
               onClick={() => handleAnswer(option)}
               disabled={hasAnswered}
-              className={`w-full text-left p-4 md:p-5 rounded-2xl border transition-all duration-300 font-bold text-sm md:text-base flex items-center justify-between shadow-sm outline-none ${
+              className={`w-full text-left p-3 md:p-4 rounded-2xl border transition-all duration-300 font-bold text-sm md:text-base flex items-center justify-between shadow-sm outline-none ${
                 hasAnswered ? 'cursor-not-allowed' : 'cursor-pointer'
               } ${optionStyle}`}
             >
@@ -210,7 +221,7 @@ export default function QuizMode({ vocabList }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
-            className="mt-6"
+            className="mt-4"
           >
             <button
               onClick={handleNextQuestion}

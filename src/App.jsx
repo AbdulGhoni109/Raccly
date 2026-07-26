@@ -34,25 +34,25 @@ function LandingPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center mb-6 relative"
+          className="flex flex-col items-center mb-3 relative"
         >
           {/* Speech Bubble Above Mascot */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
-            className="bg-white/90 backdrop-blur-md px-5 py-2 rounded-2xl shadow-lg border border-purple-100 text-purple-700 font-extrabold text-sm mb-3 flex items-center gap-1.5 shadow-purple-900/10"
+            className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-2xl shadow-lg border border-purple-100 text-purple-700 font-extrabold text-xs mb-2 flex items-center gap-1.5 shadow-purple-900/10"
           >
             <span>Hai! Yuk belajar bareng aku!</span>
           </motion.div>
 
           <div className="relative">
             {/* Soft Glow behind Mascot */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/40 rounded-full blur-2xl -z-10"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/40 rounded-full blur-2xl -z-10"></div>
             <img 
               src="/mascot/raccoon-host.png" 
               alt="Raccly Raccoon Mascot" 
-              className="w-48 md:w-56 h-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
+              className="w-32 md:w-36 h-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
               onError={(e) => {
                 e.target.src = 'https://placehold.co/400x400/transparent/transparent.png';
               }}
@@ -65,12 +65,12 @@ function LandingPage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
+          className="mb-4"
         >
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-indigo-950 mb-2 drop-shadow-sm">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-indigo-950 mb-1 drop-shadow-sm">
             Racc<span className="text-purple-600">ly</span>
           </h1>
-          <p className="text-purple-800/90 font-bold text-base md:text-lg flex items-center justify-center gap-1">
+          <p className="text-purple-800/90 font-bold text-sm md:text-base flex items-center justify-center gap-1">
             Happy Learning with Raccly! You can do it! 💪
           </p>
         </motion.div>
@@ -80,11 +80,11 @@ function LandingPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-full space-y-4"
+          className="w-full space-y-2.5"
         >
           <NavCard 
             to="/vocabulary" 
-            icon={<Type className="w-7 h-7 text-white" />} 
+            icon={<Type className="w-5 h-5 text-white" />} 
             title="Vocabulary" 
             description="Perkaya kosa katamu setiap hari"
             badge="50 kata"
@@ -93,7 +93,7 @@ function LandingPage() {
           />
           <NavCard 
             to="/grammar" 
-            icon={<BookOpen className="w-7 h-7 text-white" />} 
+            icon={<BookOpen className="w-5 h-5 text-white" />} 
             title="Grammar" 
             description="Pahami tata bahasa dengan mudah"
             badge="Topic"
@@ -102,7 +102,7 @@ function LandingPage() {
           />
           <NavCard 
             to="/reading" 
-            icon={<FileText className="w-7 h-7 text-white" />} 
+            icon={<FileText className="w-5 h-5 text-white" />} 
             title="Reading" 
             description="Latih pemahaman membacamu"
             badge="Cerita"
@@ -111,7 +111,7 @@ function LandingPage() {
           />
           <NavCard 
             to="/dashboard" 
-            icon={<BarChart3 className="w-7 h-7 text-white" />} 
+            icon={<BarChart3 className="w-5 h-5 text-white" />} 
             title="Dashboard" 
             description="Pantau pencapaian & skor kamu"
             badge="Progress"
@@ -129,31 +129,31 @@ function NavCard({ to, icon, title, description, badge, bgGradient, shadowColor 
   return (
     <Link to={to} className="group block w-full outline-none">
       <motion.div 
-        whileHover={{ scale: 1.02, y: -4 }}
+        whileHover={{ scale: 1.02, y: -3 }}
         whileTap={{ scale: 0.98 }}
-        className={`bg-gradient-to-r ${bgGradient} p-5 rounded-3xl text-white shadow-xl ${shadowColor} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
+        className={`bg-gradient-to-r ${bgGradient} px-4 py-3 rounded-2xl text-white shadow-lg ${shadowColor} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
       >
         {/* Polka Dot Texture Overlay */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
-        <div className="flex items-center gap-4 relative z-10 text-left">
-          <div className="bg-white/20 backdrop-blur-md p-3.5 rounded-2xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+        <div className="flex items-center gap-3 relative z-10 text-left">
+          <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
             {icon}
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white leading-tight">{title}</h3>
-            <p className="text-white/80 text-sm font-medium mt-0.5">{description}</p>
+            <h3 className="text-base font-bold text-white leading-tight">{title}</h3>
+            <p className="text-white/80 text-xs font-medium mt-0.5">{description}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 relative z-10">
+        <div className="flex items-center gap-2 relative z-10">
           {badge && (
-            <span className="hidden sm:inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-bold border border-white/20">
+            <span className="hidden sm:inline-block bg-white/20 backdrop-blur-md text-white text-xs px-2.5 py-0.5 rounded-full font-bold border border-white/20">
               {badge}
             </span>
           )}
-          <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:translate-x-1 transition-transform">
-            <ArrowRight className="w-5 h-5 text-white" />
+          <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:translate-x-1 transition-transform">
+            <ArrowRight className="w-4 h-4 text-white" />
           </div>
         </div>
       </motion.div>

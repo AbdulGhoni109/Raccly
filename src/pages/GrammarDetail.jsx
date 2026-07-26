@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, BookOpen, PenTool, CheckCircle2, Info, List, Sparkles } from 'lucide-react';
+import { ArrowLeft, BookOpen, PenTool, CheckCircle2, Info, List, Sparkles, AlignLeft, AlignJustify } from 'lucide-react';
 import { grammarData } from '../data/grammar';
 import GrammarExplanationFormatter from '../components/grammar/GrammarExplanationFormatter';
 import GrammarExercise from '../components/grammar/GrammarExercise';
@@ -11,6 +11,7 @@ import BackgroundClouds from '../components/BackgroundClouds';
 
 export default function GrammarDetail() {
   const { setMascotMessage } = useMascot();
+  const [viewMode, setViewMode] = useState('lengkap'); // 'ringkas' | 'lengkap'
 
   useEffect(() => {
     setMascotMessage("Pelajari polanya baik-baik ya!");
@@ -29,7 +30,7 @@ export default function GrammarDetail() {
       {/* Background Watermark & Clouds */}
       <BackgroundClouds />
 
-      <header className="max-w-4xl mx-auto mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-3 relative">
+      <header className="max-w-4xl mx-auto mb-4 md:mb-6 flex flex-col md:flex-row items-center justify-between gap-3 relative">
         <div className="w-full md:w-auto flex items-center justify-start">
           <Link to="/grammar" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
             <ArrowLeft className="w-4 h-4 mr-1.5" />
@@ -44,6 +45,41 @@ export default function GrammarDetail() {
         <div className="hidden md:block w-28"></div>
       </header>
 
+      {/* View Mode Toggle */}
+      <div className="max-w-4xl mx-auto mb-6 flex justify-center">
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-1 flex items-center gap-1 border border-white/60 shadow-sm">
+          <button
+            onClick={() => setViewMode('ringkas')}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold transition-all duration-200 ${
+              viewMode === 'ringkas'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                : 'text-slate-500 hover:text-indigo-700 hover:bg-indigo-50/60'
+            }`}
+          >
+            <AlignLeft className="w-3.5 h-3.5" />
+            Ringkas
+          </button>
+          <button
+            onClick={() => setViewMode('lengkap')}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold transition-all duration-200 ${
+              viewMode === 'lengkap'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                : 'text-slate-500 hover:text-indigo-700 hover:bg-indigo-50/60'
+            }`}
+          >
+            <AlignJustify className="w-3.5 h-3.5" />
+            Lengkap
+          </button>
+        </div>
+
+        {/* Mode hint */}
+        <div className="ml-3 flex items-center">
+          <span className="text-xs font-semibold text-indigo-900/60">
+            {viewMode === 'ringkas' ? '📖 Tampilan ringkasan cepat' : '📚 Semua detail ditampilkan'}
+          </span>
+        </div>
+      </div>
+
       <main className="max-w-4xl mx-auto pb-32">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +87,7 @@ export default function GrammarDetail() {
           transition={{ duration: 0.4 }}
         >
           {/* Main Redesigned Grammar Explanation Cards */}
-          <GrammarExplanationFormatter explanation={topic.explanation} />
+          <GrammarExplanationFormatter explanation={topic.explanation} mode={viewMode} />
 
           {/* Contoh Kalimat Ringkasan */}
           {topic.examples && topic.examples.length > 0 && (
@@ -92,3 +128,4 @@ export default function GrammarDetail() {
     </div>
   );
 }
+

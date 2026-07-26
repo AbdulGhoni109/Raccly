@@ -78,7 +78,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
   const visibleDots = Array.from({ length: dotEnd - dotStart }, (_, i) => dotStart + i);
 
   return (
-    <div className="flex flex-col items-center w-full max-w-lg mx-auto pb-10 relative z-10 select-none">
+    <div className="flex flex-col items-center w-full max-w-lg mx-auto min-h-screen pb-6 relative z-10 select-none">
       
       {/* 1. Top Navigation & Header Bar */}
       <div className="w-full flex items-center justify-between gap-3 mb-2 px-1">
@@ -110,16 +110,16 @@ export default function FlashcardMode({ vocabList, onBack }) {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-white/70 h-2.5 rounded-full overflow-hidden p-0.5 shadow-inner mb-6">
+      <div className="w-full bg-white/70 h-2 rounded-full overflow-hidden shadow-inner mb-3">
         <div
-          className="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 h-full rounded-full transition-all duration-300 ease-out shadow-xs"
+          className="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 h-full rounded-full transition-all duration-300 ease-out"
           style={{ width: `${((currentIndex + 1) / totalCount) * 100}%` }}
         />
       </div>
 
       {/* 2. Flashcard Card Area */}
       <div
-        className="w-full max-w-[340px] sm:max-w-[380px] h-[370px] sm:h-[410px] cursor-pointer relative group mx-auto"
+        className="w-full max-w-[320px] sm:max-w-[380px] h-[300px] sm:h-[380px] cursor-pointer relative group mx-auto"
         style={{ perspective: '1200px' }}
         onClick={() => setIsFlipped(!isFlipped)}
       >
@@ -152,9 +152,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
                     {currentVocab.phonetic}
                   </span>
                 ) : (
-                  <span className="text-xs font-bold text-amber-600/80 bg-amber-100/60 px-3 py-0.5 rounded-full mt-2">
-                    {categoryName}
-                  </span>
+                  <span className="mt-2 h-5" />
                 )}
               </div>
 
@@ -173,67 +171,75 @@ export default function FlashcardMode({ vocabList, onBack }) {
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             {/* Dashed Frame */}
-            <div className="w-full h-full border-2 border-dashed border-[#FCD34D]/80 rounded-[24px] sm:rounded-[28px] p-6 flex flex-col items-center justify-between text-center">
-              
-              {/* Top original word badge */}
-              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-100/80 px-3 py-1 rounded-full">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>{currentVocab.word}</span>
+            <div className="w-full h-full border-2 border-dashed border-[#FCD34D]/80 rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 flex flex-col justify-between text-center gap-3">
+
+              {/* TOP: English word chip */}
+              <div className="flex justify-center">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-100/80 px-3 py-1 rounded-full border border-amber-200/60">
+                  <Sparkles className="w-3 h-3 text-amber-500" />
+                  <span className="font-black">{currentVocab.word}</span>
+                </div>
               </div>
 
-              {/* Indonesian Meaning & Example */}
-              <div className="flex flex-col items-center justify-center my-auto w-full px-2">
-                <span className="text-[11px] font-black text-amber-600 uppercase tracking-widest mb-1">
+              {/* MIDDLE: label pill + meaning ONLY — no example here */}
+              <div className="flex flex-col items-center justify-center flex-1 gap-2 px-1">
+                <span className="inline-block bg-indigo-600 text-white text-[9px] font-black uppercase tracking-[0.18em] px-3 py-0.5 rounded-full shadow-sm">
                   Arti Bahasa Indonesia
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight mb-3">
+                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 leading-snug">
                   {currentVocab.meaning}
                 </h2>
-
-                {currentVocab.example && (
-                  <div className="bg-white/80 border border-amber-200/60 p-3 sm:p-3.5 rounded-2xl text-slate-700 text-xs sm:text-sm font-medium italic shadow-2xs w-full text-center leading-relaxed">
-                    "{currentVocab.example}"
-                  </div>
-                )}
               </div>
 
-              {/* Bottom Hint */}
-              <div className="text-amber-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 opacity-85 group-hover:opacity-100 transition-opacity pb-1">
-                <span className="text-base">👆</span>
-                <span>Tap untuk lihat kartu</span>
-              </div>
+              {/* Bottom tap hint */}
+              <p className="text-amber-400/70 text-[10px] font-bold">Tap untuk kembali</p>
 
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* 3. Button: Tandai Sudah Hafal */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          toggleMastered(currentVocab.id);
-        }}
-        className={`mt-6 px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center justify-center gap-2.5 transition-all duration-200 border shadow-md active:scale-95 ${
-          isCurrentMastered
-            ? 'bg-emerald-500 text-white border-emerald-600 shadow-emerald-500/20 hover:bg-emerald-600'
-            : 'bg-white/90 backdrop-blur-md text-slate-700 border-white hover:bg-white shadow-indigo-950/5'
-        }`}
-      >
-        <span
-          className={`w-4 h-4 rounded flex items-center justify-center transition-colors ${
+      {/* ── BELOW CARD SECTION ── */}
+      <div className="w-full max-w-[320px] sm:max-w-[380px] mx-auto mt-3 flex flex-col gap-3">
+
+        {/* Contoh Kalimat — always visible below card */}
+        {currentVocab.example && (
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/70 shadow-md px-4 py-3">
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Contoh kalimat</span>
+            <p className="text-slate-600 text-xs font-medium italic leading-relaxed">
+              "{currentVocab.example}"
+            </p>
+          </div>
+        )}
+
+        {/* Tandai Sudah Hafal */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleMastered(currentVocab.id);
+          }}
+          className={`w-full py-2.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2.5 transition-all duration-200 border shadow-md active:scale-95 ${
             isCurrentMastered
-              ? 'bg-white text-emerald-600 font-black'
-              : 'bg-slate-200 border border-slate-300'
+              ? 'bg-emerald-500 text-white border-emerald-600 shadow-emerald-500/20 hover:bg-emerald-600'
+              : 'bg-white/90 backdrop-blur-md text-slate-700 border-white hover:bg-white shadow-indigo-950/5'
           }`}
         >
-          {isCurrentMastered && <Check className="w-3 h-3 stroke-[3]" />}
-        </span>
-        <span>{isCurrentMastered ? 'Sudah Hafal' : 'Tandai Sudah Hafal'}</span>
-      </button>
+          <span
+            className={`w-4 h-4 rounded flex items-center justify-center transition-colors ${
+              isCurrentMastered
+                ? 'bg-white text-emerald-600 font-black'
+                : 'bg-slate-200 border border-slate-300'
+            }`}
+          >
+            {isCurrentMastered && <Check className="w-3 h-3 stroke-[3]" />}
+          </span>
+          <span>{isCurrentMastered ? 'Sudah Hafal ✓' : 'Tandai Sudah Hafal'}</span>
+        </button>
 
-      {/* 4. Pagination Dots */}
-      <div className="flex items-center justify-center gap-1.5 mt-5 max-w-full px-4 overflow-x-auto py-1">
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="flex items-center justify-center gap-1.5 mt-4 max-w-full px-4 overflow-x-auto py-1">
         {dotStart > 0 && <span className="text-slate-400 text-xs font-bold px-1">...</span>}
         {visibleDots.map((idx) => {
           const isActive = idx === currentIndex;
@@ -257,8 +263,8 @@ export default function FlashcardMode({ vocabList, onBack }) {
         {dotEnd < totalCount && <span className="text-slate-400 text-xs font-bold px-1">...</span>}
       </div>
 
-      {/* 5. Navigation Buttons */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-7 w-full max-w-xs sm:max-w-sm mx-auto relative z-30">
+      {/* Navigation Buttons */}
+      <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 w-full max-w-xs sm:max-w-sm mx-auto relative z-30">
         <button
           onClick={handlePrev}
           className="flex-1 py-3 px-5 rounded-full bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs sm:text-sm border border-slate-100 shadow-md shadow-indigo-950/5 transition-all active:scale-95 flex items-center justify-center gap-1.5"

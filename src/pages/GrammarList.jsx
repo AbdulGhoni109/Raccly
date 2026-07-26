@@ -27,58 +27,52 @@ export default function GrammarList() {
       {/* Background Watermark & Clouds */}
       <BackgroundClouds />
 
-      <header className="max-w-4xl mx-auto mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-3 relative">
-        <div className="w-full md:w-auto flex items-center justify-start">
-          <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
-            <ArrowLeft className="w-4 h-4 mr-1.5" />
-            Beranda
-          </Link>
+      {/* Header */}
+      <header className="max-w-3xl mx-auto mb-4 flex items-center gap-3">
+        <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0">
+          <ArrowLeft className="w-4 h-4 mr-1.5" />
+          Beranda
+        </Link>
+
+        {/* Breadcrumb */}
+        <div className="text-[10px] font-extrabold text-purple-900/50 flex items-center gap-1 uppercase tracking-wider min-w-0 overflow-hidden">
+          <span className="truncate">Grammar Topics</span>
         </div>
-        <div className="text-center">
-          <h1 className="text-2xl md:text-4xl font-black text-indigo-950 drop-shadow-sm">
-            Grammar Topics <span className="text-purple-600">📝</span>
-          </h1>
-          <p className="text-purple-900/80 text-xs md:text-sm font-semibold mt-0.5">Pilih topik tata bahasa yang ingin kamu pelajari</p>
-        </div>
-        <div className="hidden md:block w-28"></div>
       </header>
 
-      <main className="max-w-3xl mx-auto pb-32">
-        <div className="space-y-4">
+      <main className="max-w-3xl mx-auto pb-8">
+        <div className="space-y-2.5">
           {grammarData.map((topic, index) => {
             const style = cardGradients[index % cardGradients.length];
             return (
               <motion.div
                 key={topic.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
               >
                 <Link to={`/grammar/${topic.id}`} className="group block outline-none">
-                  <div className={`bg-gradient-to-r ${style.bg} p-6 rounded-3xl text-white shadow-xl ${style.shadow} flex items-center justify-between transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 relative overflow-hidden border border-white/10`}>
+                  <div className={`bg-gradient-to-r ${style.bg} px-4 py-3.5 rounded-2xl text-white shadow-lg ${style.shadow} flex items-center justify-between transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden border border-white/10`}>
                     
                     {/* Polka Dot Texture Overlay */}
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
-                    <div className="flex items-center gap-5 relative z-10 pr-4">
-                      <div className="bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <BookOpen className="w-8 h-8 text-white" />
+                    <div className="flex items-center gap-3 relative z-10 min-w-0 pr-2">
+                      <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <BookOpen className="w-5 h-5 text-white" />
                       </div>
-                      <div>
-                        <div className="flex items-center gap-3 mb-1">
-                          <h3 className="text-2xl font-bold text-white leading-tight">{topic.title}</h3>
-                          <span className="bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-bold border border-white/20">
-                            {topic.exercises.length} latihan
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="text-sm sm:text-base font-bold text-white leading-tight truncate">{topic.title}</h3>
+                          <span className="bg-white/20 backdrop-blur-md text-white text-[10px] px-2.5 py-0.5 rounded-full font-bold border border-white/20 flex-shrink-0">
+                            {topic.exercises.length} soal
                           </span>
                         </div>
-                        <p className="text-white/85 text-sm font-medium line-clamp-2 max-w-lg">
-                          {topic.explanation}
-                        </p>
                       </div>
                     </div>
 
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
-                      <ChevronRight className="w-6 h-6 text-white" />
+                    <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
+                      <ChevronRight className="w-3.5 h-3.5 text-white" />
                     </div>
                   </div>
                 </Link>
@@ -90,3 +84,4 @@ export default function GrammarList() {
     </div>
   );
 }
+

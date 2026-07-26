@@ -425,6 +425,52 @@ function CollapsibleSection({ title, iconEmoji, lines, defaultOpen = false }) {
 }
 
 /**
+ * Ringkas (compact) wrapper — wraps any card type into a collapsible with summary
+ */
+function RingkasCardWrapper({ title, iconEmoji, children }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-xl shadow-purple-900/5 mb-4 overflow-hidden"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-5 py-4 text-left flex items-center justify-between gap-3 hover:bg-slate-50/80 transition-colors outline-none"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-base flex-shrink-0">
+            {iconEmoji || '📌'}
+          </div>
+          <h3 className="text-sm sm:text-base font-black text-indigo-950 leading-tight">
+            {title}
+          </h3>
+        </div>
+        <div className="w-7 h-7 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 flex-shrink-0">
+          {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="px-5 pb-5 pt-1 border-t border-indigo-50"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+/**
  * Helper to render standard lines with formatted examples and lists
  */
 function StandardLinesRenderer({ lines }) {
@@ -489,7 +535,7 @@ function StandardCardView({ title, iconEmoji, lines }) {
 /**
  * Main Formatter Component
  */
-export default function GrammarExplanationFormatter({ explanation }) {
+export default function GrammarExplanationFormatter({ explanation, mode = 'lengkap' }) {
   if (!explanation) return null;
 
   // Split into raw sections based on emoji headers (📌, 📊, 🔍, ⏰, ⚠️, ⚔️, ⚡, 🎯, 💡)
@@ -521,24 +567,40 @@ export default function GrammarExplanationFormatter({ explanation }) {
   }
   if (currentSec) sections.push(currentSec);
 
+  const isRingkas = mode === 'ringkas';
+
   return (
     <div className="w-full space-y-6">
       {sections.map((sec, idx) => {
         const titleUpper = sec.title.toUpperCase();
+        const isWarning = sec.emoji === '⚠️' || titleUpper.includes('KESALAHAN UMUM') || titleUpper.includes('MISTAKES');
 
-        // 1. WARNING CARD (Kesalahan Umum)
-        if (sec.emoji === '⚠️' || titleUpper.includes('KESALAHAN UMUM') || titleUpper.includes('MISTAKES')) {
+        // Kesalahan Umum: ALWAYS full, regardless of mode
+        if (isWarning) {
           return <WarningMistakesCard key={idx} title={sec.title} lines={sec.lines} />;
         }
 
-        // 2. FORMULA & PATTERN CARD (Must check BEFORE functions to avoid stealing formula bullets)
+        // In RINGKAS mode: wrap every non-warning section in RingkasCardWrapper
+        if (isRingkas) {
+          return (
+            <RingkasCardWrapper key={idx} title={sec.title} iconEmoji={sec.emoji}>
+              <StandardLinesRenderer lines={sec.lines.slice(0, 4)} />
+              {sec.lines.length > 4 && (
+                <p className="text-xs font-bold text-indigo-500 mt-2">+ {sec.lines.length - 4} baris lainnya tersembunyi...</p>
+              )}
+            </RingkasCardWrapper>
+          );
+        }
+
+        // LENGKAP mode — original logic below
+
+        // 2. FORMULA & PATTERN CARD
         if (sec.emoji === '📊' || titleUpper.includes('RUMUS') || titleUpper.includes('POLA KALIMAT')) {
           return <FormulaCardView key={idx} title={sec.title} lines={sec.lines} />;
         }
 
-        // 3. FUNCTIONS GRID VIEW ("Fungsi Utama", "Empat Fungsi", etc.)
+        // 3. FUNCTIONS GRID VIEW
         if (titleUpper.includes('FUNGSI') || sec.lines.some(l => l.includes('Fungsi Utama'))) {
-          // Parse function items
           const items = [];
           let introText = '';
           let currentItem = null;
@@ -550,7 +612,6 @@ export default function GrammarExplanationFormatter({ explanation }) {
             if (tr.startsWith('•') || tr.startsWith('-')) {
               if (currentItem) items.push(currentItem);
 
-              // Extract title, desc, examples
               const colonIdx = tr.indexOf(':');
               let itemTitle = 'Fungsi';
               let itemDesc = '';
@@ -562,7 +623,6 @@ export default function GrammarExplanationFormatter({ explanation }) {
                 itemTitle = tr.replace(/^[•-]\s*/, '').trim();
               }
 
-              // Icon mapping based on title keywords
               let icon = '📌';
               const titleLower = itemTitle.toLowerCase();
               if (titleLower.includes('kebiasaan') || titleLower.includes('rutinitas') || titleLower.includes('habit')) icon = '🔄';
@@ -574,18 +634,11 @@ export default function GrammarExplanationFormatter({ explanation }) {
               else if (titleLower.includes('pengalaman') || titleLower.includes('experience')) icon = '🏆';
               else if (titleLower.includes('berubah') || titleLower.includes('changing')) icon = '📈';
 
-              currentItem = {
-                title: itemTitle,
-                desc: itemDesc,
-                icon: icon,
-                examples: []
-              };
+              currentItem = { title: itemTitle, desc: itemDesc, icon: icon, examples: [] };
             } else if (tr.startsWith('Contoh:') || tr.includes('Contoh:')) {
               const exStr = tr.replace(/^Contoh:\s*/, '');
               const exList = exStr.split(' / ').map(e => e.trim());
-              if (currentItem) {
-                currentItem.examples.push(...exList);
-              }
+              if (currentItem) { currentItem.examples.push(...exList); }
             } else if (!currentItem) {
               introText += (introText ? '\n' : '') + tr;
             }
@@ -593,18 +646,11 @@ export default function GrammarExplanationFormatter({ explanation }) {
           if (currentItem) items.push(currentItem);
 
           if (items.length > 0) {
-            return (
-              <FunctionsGridView
-                key={idx}
-                title={sec.title}
-                introText={introText}
-                items={items}
-              />
-            );
+            return <FunctionsGridView key={idx} title={sec.title} introText={introText} items={items} />;
           }
         }
 
-        // 4. ACCORDION COLLAPSIBLE CARD (for long rule sections like Aturan -ing / -ed / Irregular Verbs)
+        // 4. ACCORDION COLLAPSIBLE CARD
         if (sec.emoji === '🔍' || titleUpper.includes('ATURAN') || titleUpper.includes('IRREGULAR VERBS') || sec.lines.length > 15) {
           return (
             <CollapsibleSection
