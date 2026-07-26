@@ -203,5 +203,210 @@ export const storiesData = [
         answer: "She learned to be content with her personal progress and proud of her gifts."
       }
     ]
+  },
+  {
+    id: "s-008",
+    title: "Daniel's Daily Steps",
+    moralValue: "Ketekunan dan kerja keras bertahap membuahkan hasil sejati.",
+    content: "Daniel always wanted to play the violin in the school orchestra, but his initial notes were scratchy and out of tune. While others picked up instruments quickly, Daniel progressed slowly. Instead of quitting, he became persistent, practicing twenty minutes every evening. Over months of steady effort, his technique improved. He remained humble when receiving tips from his music teacher and stayed zealous in his routines. During the mid-year showcase, Daniel played his melody smoothly, feeling delighted when the audience applauded. He realized that consistency matters far more than instant talent.",
+    translation: "Daniel selalu ingin bermain biola di orkestra sekolah, tetapi nada awalnya sengau dan tidak pas. Sementara orang lain cepat mahir bermain alat musik, Daniel berkembang perlahan. Alih-alih menyerah, dia menjadi gigih, berlatih dua puluh menit setiap sore. Berbulan-bulan latihan yang konsisten membuat tekniknya meningkat. Dia tetap rendah hati saat menerima masukan dari guru musiknya dan tetap tekun dalam rutinitasnya. Saat pameran pertengahan tahun, Daniel memainkan melodinya dengan lancar dan merasa sangat gembira ketika penonton bertepuk tangan. Dia sadar bahwa konsistensi jauh lebih penting daripada bakat instan.",
+    highlightedWords: ["persistent", "humble", "zealous", "delighted"],
+    quote: "True mastery is not built in a single day, but through steady everyday steps.",
+    comprehensionQuestions: [
+      {
+        question: "What difficulty did Daniel face when he started playing the violin?",
+        options: [
+          "His initial notes were scratchy and out of tune.",
+          "He did not own a violin.",
+          "His music teacher refused to teach him.",
+          "The school orchestra was canceled."
+        ],
+        answer: "His initial notes were scratchy and out of tune."
+      },
+      {
+        question: "How did Daniel approach his violin practice?",
+        options: [
+          "He was persistent and practiced twenty minutes every evening.",
+          "He practiced only once a month before exams.",
+          "He copied notes from his classmates.",
+          "He quit playing after the first week."
+        ],
+        answer: "He was persistent and practiced twenty minutes every evening."
+      },
+      {
+        question: "What lesson did Daniel realize after his performance?",
+        options: [
+          "Consistency matters far more than instant talent.",
+          "Playing loud music is the secret to success.",
+          "Only natural born musicians can play in an orchestra.",
+          "Practicing every day is a waste of time."
+        ],
+        answer: "Consistency matters far more than instant talent."
+      }
+    ]
+  },
+  {
+    id: "s-009",
+    title: "Rory's Honest Choice",
+    moralValue: "Kejujuran dan integritas memberikan kedamaian hati yang sejati.",
+    content: "Rory had been sick with a fever for two days before the big history test. On test day, he felt unprepared and noticed a cheat sheet dropped on the floor near his desk. The temptation to peek was strong because he feared getting a bad grade. However, Rory paused and chose to be courageous by sticking to his personal values. He pushed the paper away and answered only what he honestly knew. Though his score was average, Rory felt peaceful inside. His teacher praised his honesty, leaving Rory feeling spirited and proud of his integrity.",
+    translation: "Rory sempat demam selama dua hari sebelum ujian sejarah besar. Pada hari ujian, dia merasa kurang siap dan melihat secarik kertas catatan jatuh di lantai dekat mejanya. Godaan untuk mengintip sangat kuat karena dia takut mendapat nilai jelek. Namun, Rory berhenti sejenak dan memilih untuk berani dengan memegang teguh nilai pribadinya. Dia menggeser kertas itu dan menjawab hanya apa yang jujur dia ketahui. Meskipun nilainya biasa saja, Rory merasa damai di dalam hati. Gurunya memuji kejujurannya, membuat Rory merasa bersemangat dan bangga atas integritasnya.",
+    highlightedWords: ["courageous", "peaceful", "spirited"],
+    quote: "Integrity is choosing peace of mind over a shortcut you would regret.",
+    comprehensionQuestions: [
+      {
+        question: "Why was Rory unprepared for his history test?",
+        options: [
+          "He had been sick with a fever for two days.",
+          "He stayed up late playing video games.",
+          "He lost his history notebook.",
+          "He forgot that there was a test."
+        ],
+        answer: "He had been sick with a fever for two days."
+      },
+      {
+        question: "What did Rory do when he saw the cheat sheet on the floor?",
+        options: [
+          "He pushed the paper away and chose to answer honestly.",
+          "He picked up the paper and copied all the answers.",
+          "He hid the paper inside his pocket.",
+          "He gave the paper to his friend."
+        ],
+        answer: "He pushed the paper away and chose to answer honestly."
+      },
+      {
+        question: "How did Rory feel after completing the test honestly?",
+        options: [
+          "Peaceful inside and proud of his integrity.",
+          "Angry and frustrated with his teacher.",
+          "Scared that his friends would laugh at him.",
+          "Embarrassed by his decision."
+        ],
+        answer: "Peaceful inside and proud of his integrity."
+      }
+    ]
+  },
+  {
+    id: "s-010",
+    title: "Chloe's Brave Step",
+    moralValue: "Keberanian mencoba hal baru lebih berharga daripada rasa takut gagal.",
+    content: "Chloe dreamed of joining the school drama club, but her fear of making mistakes kept her back. She watched rehearsals from afar, wishing she was fearless. One afternoon, her friend invited her to read a short script together. With her friend's warmhearted encouragement, Chloe attended the tryouts. Though her voice trembled slightly, she gave an eager performance. She did not get the lead role, but she landed a supporting part. Chloe smiled broadly, realizing that stepping out of her comfort zone was the bravest victory she had ever achieved.",
+    translation: "Chloe bermimpi bergabung dengan klub drama sekolah, tetapi rasa takutnya akan membuat kesalahan menahannya. Dia mengamati latihan dari kejauhan, berharap dia pemberani. Suatu sore, temannya mengundangnya membaca naskah pendek bersama. Dengan dorongan hangat dari temannya, Chloe menghadiri audisi. Meskipun suaranya sedikit gemetar, dia memberikan penampilan yang antusias. Dia tidak mendapatkan peran utama, tetapi dia meraih peran pendukung. Chloe tersenyum lebar, menyadari bahwa melangkah keluar dari zona nyaman adalah kemenangan paling berani yang pernah dia raih.",
+    highlightedWords: ["fearless", "warmhearted", "eager"],
+    quote: "Courage is not the absence of fear, but the willingness to take a step anyway.",
+    comprehensionQuestions: [
+      {
+        question: "What stopped Chloe from joining the drama club initially?",
+        options: [
+          "Her fear of making mistakes and being judged.",
+          "She was not allowed by the school principal.",
+          "The drama club was already full.",
+          "She did not like acting."
+        ],
+        answer: "Her fear of making mistakes and being judged."
+      },
+      {
+        question: "What helped Chloe decide to attend the drama tryouts?",
+        options: [
+          "Warmhearted encouragement from her friend.",
+          "Winning a prize in a different competition.",
+          "A direct command from her teacher.",
+          "Watching a movie at home."
+        ],
+        answer: "Warmhearted encouragement from her friend."
+      },
+      {
+        question: "What did Chloe realize after landing a supporting role?",
+        options: [
+          "Stepping out of her comfort zone was a valuable victory.",
+          "She should only try out for main roles.",
+          "Acting was too hard for her.",
+          "She should never join school clubs again."
+        ],
+        answer: "Stepping out of her comfort zone was a valuable victory."
+      }
+    ]
+  },
+  {
+    id: "s-011",
+    title: "Marcus and the Team Idea",
+    moralValue: "Menghargai sudut pandang orang lain memperkaya hasil kerja bersama.",
+    content: "Marcus was heading a science poster group. He felt confident about his own topic idea and became frustrated when his teammate Elena suggested a different approach. Marcus wanted everyone to follow his plan. Seeing the tension, their group held a sit-down discussion. Elena explained her insightful perspective calmly. Listening carefully, Marcus realized he needed to be openminded and cooperative. They decided to combine both ideas into one creative poster. The final project turned out far better than Marcus's original draft. Marcus learned that harmonious teamwork relies on respecting different views.",
+    translation: "Marcus memimpin kelompok poster sains. Dia merasa yakin dengan ide topiknya sendiri dan menjadi frustrasi ketika rekan timnya Elena menyarankan pendekatan berbeda. Marcus ingin semua orang mengikuti rencananya. Melihat ketegangan tersebut, kelompok mereka mengadakan diskusi duduk bersama. Elena menjelaskan sudut pandangnya yang berwawasan luas dengan tenang. Mendengarkan secara saksama, Marcus sadar dia perlu berpikiran terbuka dan kooperatif. Mereka memutuskan untuk menggabungkan kedua ide menjadi satu poster kreatif. Proyek akhir ternyata jauh lebih baik daripada draf asli Marcus. Marcus belajar bahwa kerja tim yang rukun mengandalkan sikap saling menghargai perbedaan pandangan.",
+    highlightedWords: ["insightful", "openminded", "cooperative", "harmonious"],
+    quote: "Different perspectives are not obstacles, but colors that make teamwork richer.",
+    comprehensionQuestions: [
+      {
+        question: "Why did friction occur between Marcus and Elena?",
+        options: [
+          "They had different ideas for the science poster project.",
+          "Marcus lost the poster paper.",
+          "Elena missed all the group meetings.",
+          "They were assigned to different classes."
+        ],
+        answer: "They had different ideas for the science poster project."
+      },
+      {
+        question: "What change in attitude helped Marcus resolve the group tension?",
+        options: [
+          "He became open-minded and cooperative toward Elena's ideas.",
+          "He left the group to work alone.",
+          "He forced everyone to vote for his idea only.",
+          "He asked the teacher to change his group."
+        ],
+        answer: "He became open-minded and cooperative toward Elena's ideas."
+      },
+      {
+        question: "What was the result of combining both Marcus's and Elena's ideas?",
+        options: [
+          "The final project turned out far better than the original draft.",
+          "The group failed to submit the poster on time.",
+          "The poster became too messy to read.",
+          "The teacher rejected their poster topic."
+        ],
+        answer: "The final project turned out far better than the original draft."
+      }
+    ]
+  },
+  {
+    id: "s-012",
+    title: "Tariq's Balanced Pace",
+    moralValue: "Keseimbangan antara belajar keras dan istirahat mencegah kelelahan berlebih.",
+    content: "Tariq was an ambitious student who studied until 2 AM every night. He believed that resting was a sign of laziness. However, after two weeks of nonstop studying, Tariq began failing simple quizzes because his brain was exhausted. Seeing his burnout, his school counselor advised Tariq to be mindful of his body's limits and remain adaptable to healthier routines. Tariq agreed to schedule mandatory break periods and sleep eight hours a night. Soon, his energy returned, and he felt cheerful and clear-headed. Tariq discovered that a rested mind absorbs knowledge much better.",
+    translation: "Tariq adalah seorang siswa ambisius yang belajar hingga jam 2 pagi setiap malam. Dia percaya bahwa beristirahat adalah tanda kemalasan. Namun, setelah dua minggu belajar tanpa henti, Tariq mulai gagal dalam kuis-kuis sederhana karena otaknya kelelahan. Melihat kelelahannya, konselor sekolah menasihati Tariq untuk sadar penuh akan batas tubuhnya dan tetap fleksibel terhadap rutinitas yang lebih sehat. Tariq setuju untuk menjadwalkan periode istirahat wajib dan tidur delapan jam semalam. Tak lama kemudian, energinya kembali, dan dia merasa ceria serta berpikiran jernih. Tariq menemukan bahwa pikiran yang cukup istirahat menyerap ilmu dengan jauh lebih baik.",
+    highlightedWords: ["mindful", "adaptable", "cheerful"],
+    quote: "Resting your mind is not a pause in progress, but the fuel that sustains it.",
+    comprehensionQuestions: [
+      {
+        question: "Why did Tariq's quiz performance decrease after two weeks?",
+        options: [
+          "His brain was exhausted from studying until 2 AM every night without rest.",
+          "He stopped attending his classes.",
+          "The quizzes became much harder.",
+          "He lost his study notes."
+        ],
+        answer: "His brain was exhausted from studying until 2 AM every night without rest."
+      },
+      {
+        question: "What advice did the school counselor give to Tariq?",
+        options: [
+          "To be mindful of his body's limits and adopt a healthier routine.",
+          "To study even more hours during the night.",
+          "To drop out of all school clubs.",
+          "To take a month-long vacation from school."
+        ],
+        answer: "To be mindful of his body's limits and adopt a healthier routine."
+      },
+      {
+        question: "What happened after Tariq started getting enough sleep and taking breaks?",
+        options: [
+          "His energy returned and his mind became clear and cheerful.",
+          "He forgot all the formulas he memorized.",
+          "He arrived late to school every day.",
+          "His grades dropped further."
+        ],
+        answer: "His energy returned and his mind became clear and cheerful."
+      }
+    ]
   }
 ];
