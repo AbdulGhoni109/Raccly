@@ -131,10 +131,8 @@ function WarningMistakesCard({ title, lines }) {
   if (currentMistake) mistakes.push(currentMistake);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-[#FFFDF0] via-[#FFF7ED] to-[#FEF3C7] rounded-3xl p-6 sm:p-8 border-2 border-amber-300/80 shadow-xl shadow-amber-500/10 mb-8"
+    <div
+      className="bg-gradient-to-br from-[#FFFDF0] via-[#FFF7ED] to-[#FEF3C7] rounded-3xl p-6 sm:p-8 border-2 border-amber-300/80 shadow-md sm:shadow-lg shadow-amber-500/10 mb-8"
     >
       {/* Card Header */}
       <div className="flex items-center gap-3 mb-6 pb-4 border-b border-amber-200/80">
@@ -212,7 +210,7 @@ function WarningMistakesCard({ title, lines }) {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -221,10 +219,8 @@ function WarningMistakesCard({ title, lines }) {
  */
 function FunctionsGridView({ title, introText, items }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-xl shadow-purple-900/5 mb-8"
+    <div
+      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-4 pb-3 border-b border-indigo-50">
@@ -274,7 +270,7 @@ function FunctionsGridView({ title, introText, items }) {
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -314,10 +310,8 @@ function FormulaCardView({ title, lines }) {
   if (currentBlock) blocks.push(currentBlock);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-indigo-50/90 via-purple-50/40 to-white rounded-3xl p-6 sm:p-8 border border-indigo-150 shadow-xl shadow-purple-900/5 mb-8"
+    <div
+      className="bg-gradient-to-br from-indigo-50/90 via-purple-50/40 to-white rounded-3xl p-6 sm:p-8 border border-indigo-150 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-6 pb-4 border-b border-indigo-100">
@@ -368,7 +362,7 @@ function FormulaCardView({ title, lines }) {
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -379,10 +373,8 @@ function CollapsibleSection({ title, iconEmoji, lines, defaultOpen = false }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-xl shadow-purple-900/5 mb-8 overflow-hidden"
+    <div
+      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8 overflow-hidden"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -413,14 +405,14 @@ function CollapsibleSection({ title, iconEmoji, lines, defaultOpen = false }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="px-6 pb-6 pt-2 border-t border-indigo-50"
           >
             <StandardLinesRenderer lines={lines} />
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -431,10 +423,8 @@ function RingkasCardWrapper({ title, iconEmoji, children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-xl shadow-purple-900/5 mb-4 overflow-hidden"
+    <div
+      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-4 overflow-hidden"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -466,7 +456,7 @@ function RingkasCardWrapper({ title, iconEmoji, children }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -513,10 +503,8 @@ function StandardLinesRenderer({ lines }) {
  */
 function StandardCardView({ title, iconEmoji, lines }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-xl shadow-purple-900/5 mb-8"
+    <div
+      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
     >
       <div className="flex items-center gap-3 mb-5 pb-3 border-b border-indigo-50">
         <div className="w-10 h-10 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-md flex-shrink-0">
@@ -528,7 +516,7 @@ function StandardCardView({ title, iconEmoji, lines }) {
       </div>
 
       <StandardLinesRenderer lines={lines} />
-    </motion.div>
+    </div>
   );
 }
 
@@ -538,34 +526,38 @@ function StandardCardView({ title, iconEmoji, lines }) {
 export default function GrammarExplanationFormatter({ explanation, mode = 'lengkap' }) {
   if (!explanation) return null;
 
-  // Split into raw sections based on emoji headers (📌, 📊, 🔍, ⏰, ⚠️, ⚔️, ⚡, 🎯, 💡)
-  const headerRegex = /^(📌|📊|🔍|⏰|⚠️|⚔️|⚡|🎯|💡)\s*(.*)/;
-  const lines = explanation.split('\n');
-  const sections = [];
-  let currentSec = null;
+  // Memoize raw section splitting so regex parsing runs only ONCE per topic
+  const sections = React.useMemo(() => {
+    const headerRegex = /^(📌|📊|🔍|⏰|⚠️|⚔️|⚡|🎯|💡)\s*(.*)/;
+    const lines = explanation.split('\n');
+    const result = [];
+    let currentSec = null;
 
-  for (let line of lines) {
-    const match = line.match(headerRegex);
-    if (match) {
-      if (currentSec) sections.push(currentSec);
-      currentSec = {
-        emoji: match[1],
-        title: match[2].trim(),
-        lines: []
-      };
-    } else {
-      if (currentSec) {
-        currentSec.lines.push(line);
-      } else {
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const match = line.match(headerRegex);
+      if (match) {
+        if (currentSec) result.push(currentSec);
         currentSec = {
-          emoji: '📌',
-          title: 'Penjelasan Utama',
-          lines: [line]
+          emoji: match[1],
+          title: match[2].trim(),
+          lines: []
         };
+      } else {
+        if (currentSec) {
+          currentSec.lines.push(line);
+        } else {
+          currentSec = {
+            emoji: '📌',
+            title: 'Penjelasan Utama',
+            lines: [line]
+          };
+        }
       }
     }
-  }
-  if (currentSec) sections.push(currentSec);
+    if (currentSec) result.push(currentSec);
+    return result;
+  }, [explanation]);
 
   const isRingkas = mode === 'ringkas';
 
