@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, BookOpen, PenTool, Lightbulb } from 'lucide-react';
+import { ArrowLeft, BookOpen, PenTool, Lightbulb, Languages } from 'lucide-react';
 import { storiesData } from '../data/stories';
 import { vocabularyData } from '../data/vocabulary';
 import ReadingQuiz from '../components/reading/ReadingQuiz';
@@ -19,6 +19,7 @@ export default function ReadingDetail() {
   const { id } = useParams();
   const story = storiesData.find(s => s.id === id);
   const [activeTooltip, setActiveTooltip] = useState(null);
+  const [showTranslation, setShowTranslation] = useState(false);
 
   if (!story) {
     return <Navigate to="/reading" replace />;
@@ -99,11 +100,50 @@ export default function ReadingDetail() {
           transition={{ duration: 0.4 }}
         >
           
-          <div className="bg-white/90 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/60 mb-8 leading-relaxed text-lg text-slate-800 font-medium">
+          <div className="bg-white/90 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/60 mb-6 leading-relaxed text-lg text-slate-800 font-medium">
             <p>
               {renderContent(story.content, story.highlightedWords)}
             </p>
           </div>
+
+          {/* Terjemahan Bahasa Indonesia Toggle */}
+          {story.translation && (
+            <div className="mb-8">
+              <button
+                onClick={() => setShowTranslation(!showTranslation)}
+                className="w-full bg-white/80 hover:bg-white backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/60 shadow-sm flex items-center justify-between text-indigo-950 font-bold text-sm transition-all duration-200 active:scale-[0.99]"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Languages className="w-5 h-5 text-indigo-600" />
+                  <span>Terjemahan Bahasa Indonesia</span>
+                </div>
+                <span className="text-xs bg-indigo-100 text-indigo-800 font-extrabold px-3 py-1 rounded-full border border-indigo-200">
+                  {showTranslation ? 'Sembunyikan ▲' : 'Lihat Teks ▼'}
+                </span>
+              </button>
+
+              <AnimatePresence>
+                {showTranslation && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-3 bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-indigo-100 shadow-md leading-relaxed text-base text-slate-700 font-medium">
+                      <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest block mb-2 flex items-center gap-1">
+                        🇮🇩 Terjemahan Bahasa Indonesia
+                      </span>
+                      <p className="leading-relaxed">
+                        {story.translation}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
 
           {/* Moral Quote Card */}
           <div className="bg-gradient-to-r from-[#F59E0B] to-[#D97706] p-6 md:p-8 rounded-3xl text-white shadow-xl shadow-amber-500/25 mb-12 flex items-start relative overflow-hidden border border-white/10">
