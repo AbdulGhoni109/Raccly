@@ -179,20 +179,37 @@ export default function Vocabulary() {
     }
   };
 
-  const uniqueCategories = Array.from(new Set(vocabularyData.map(v => v.category)));
+  // Pre-calculate stats per category in a single pass O(N) instead of O(N*C) filter per render
+  const categoryStats = React.useMemo(() => {
+    const stats = {};
+    for (let i = 0; i < vocabularyData.length; i++) {
+      const v = vocabularyData[i];
+      if (!stats[v.category]) {
+        stats[v.category] = { total: 0, mastered: 0 };
+      }
+      stats[v.category].total += 1;
+      if (vocabProgress[v.id]) {
+        stats[v.category].mastered += 1;
+      }
+    }
+    return stats;
+  }, [vocabProgress]);
 
-  const categories = uniqueCategories.map(catName => {
-    const config = categoryConfig[catName] || {
-      description: 'Koleksi kosakata bahasa Inggris',
-      icon: <BookOpen className="w-7 h-7 text-white" />,
-      gradient: 'from-[#6366F1] to-[#4F46E5]',
-      shadow: 'shadow-indigo-500/20'
-    };
-    return {
-      name: catName,
-      ...config
-    };
-  });
+  const categories = React.useMemo(() => {
+    const uniqueCatNames = Object.keys(categoryStats);
+    return uniqueCatNames.map(catName => {
+      const config = categoryConfig[catName] || {
+        description: 'Koleksi kosakata bahasa Inggris',
+        icon: <BookOpen className="w-7 h-7 text-white" />,
+        gradient: 'from-[#6366F1] to-[#4F46E5]',
+        shadow: 'shadow-indigo-500/20'
+      };
+      return {
+        name: catName,
+        ...config
+      };
+    });
+  }, [categoryStats]);
 
   const getActiveModeObj = () => modes.find(m => m.id === selectedMode);
 
@@ -262,7 +279,7 @@ export default function Vocabulary() {
                   <motion.div 
                     whileHover={{ scale: 1.02, y: -3 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`bg-gradient-to-r ${mode.gradient} px-4 py-3.5 rounded-2xl text-white shadow-lg ${mode.shadow} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
+                    className={`bg-gradient-to-r ${mode.gradient} px-4 py-3.5 rounded-2xl text-white shadow-md sm:shadow-lg ${mode.shadow} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
                   >
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
@@ -296,9 +313,9 @@ export default function Vocabulary() {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {categories.map((cat) => {
-                  const catWords = vocabularyData.filter(v => v.category === cat.name);
-                  const totalCount = catWords.length;
-                  const masteredCount = catWords.filter(v => vocabProgress[v.id] === true).length;
+                  const stat = categoryStats[cat.name] || { total: 0, mastered: 0 };
+                  const totalCount = stat.total;
+                  const masteredCount = stat.mastered;
                   const progressPct = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
 
                   return (
@@ -310,7 +327,7 @@ export default function Vocabulary() {
                       <motion.div
                         whileHover={{ scale: 1.02, y: -3 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`bg-gradient-to-r ${cat.gradient} px-4 py-3.5 rounded-2xl text-white shadow-lg ${cat.shadow} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
+                        className={`bg-gradient-to-r ${cat.gradient} px-4 py-3.5 rounded-2xl text-white shadow-md sm:shadow-lg ${cat.shadow} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
                       >
                         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
@@ -338,6 +355,7 @@ export default function Vocabulary() {
                 })}
               </div>
             </motion.div>
+
           )}
 
           {/* STEP 3 — Mode Latihan */}

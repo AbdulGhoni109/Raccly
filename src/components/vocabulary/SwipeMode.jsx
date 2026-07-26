@@ -239,7 +239,7 @@ export default function SwipeMode({ vocabList, onBack }) {
 
         {/* Main Swipable Card */}
         <motion.div
-          className="w-full h-full bg-gradient-to-b from-white to-indigo-50/60 rounded-[2.5rem] shadow-xl border border-white/80 flex flex-col justify-between p-5 sm:p-6 cursor-grab active:cursor-grabbing relative overflow-hidden"
+          className="w-full h-full bg-gradient-to-b from-white to-indigo-50/60 rounded-[2.5rem] shadow-md sm:shadow-xl border border-white/80 flex flex-col justify-between p-5 sm:p-6 cursor-grab active:cursor-grabbing relative overflow-hidden will-change-transform"
           style={{ x, rotate, opacity }}
           drag={isAnswering ? false : "x"}
           dragConstraints={{ left: 0, right: 0 }}

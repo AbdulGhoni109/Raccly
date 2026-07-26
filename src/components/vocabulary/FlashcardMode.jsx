@@ -131,7 +131,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
         >
           {/* FRONT SIDE */}
           <div
-            className="absolute w-full h-full bg-gradient-to-b from-[#FFFDF2] via-[#FFF9D6] to-[#FFF5C0] rounded-[32px] sm:rounded-[36px] shadow-[0_20px_50px_-10px_rgba(168,85,247,0.22),0_10px_25px_-5px_rgba(249,115,22,0.12)] border border-amber-200/60 p-3 flex flex-col justify-between"
+            className="absolute w-full h-full bg-gradient-to-b from-[#FFFDF2] via-[#FFF9D6] to-[#FFF5C0] rounded-[32px] sm:rounded-[36px] shadow-md sm:shadow-[0_20px_50px_-10px_rgba(168,85,247,0.22),0_10px_25px_-5px_rgba(249,115,22,0.12)] border border-amber-200/60 p-3 flex flex-col justify-between"
             style={{ backfaceVisibility: 'hidden' }}
           >
             {/* Dashed Frame */}
@@ -167,7 +167,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
 
           {/* BACK SIDE */}
           <div
-            className="absolute w-full h-full bg-gradient-to-b from-[#FFFDF2] via-[#FFF9D6] to-[#FFF5C0] rounded-[32px] sm:rounded-[36px] shadow-[0_20px_50px_-10px_rgba(168,85,247,0.22),0_10px_25px_-5px_rgba(249,115,22,0.12)] border border-amber-200/60 p-3 flex flex-col justify-between"
+            className="absolute w-full h-full bg-gradient-to-b from-[#FFFDF2] via-[#FFF9D6] to-[#FFF5C0] rounded-[32px] sm:rounded-[36px] shadow-md sm:shadow-[0_20px_50px_-10px_rgba(168,85,247,0.22),0_10px_25px_-5px_rgba(249,115,22,0.12)] border border-amber-200/60 p-3 flex flex-col justify-between"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             {/* Dashed Frame */}

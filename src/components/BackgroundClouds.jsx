@@ -7,10 +7,13 @@ import React from 'react';
 export default function BackgroundClouds() {
   return (
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none select-none">
-      {/* Soft Ambient Glowing Blobs */}
-      <div className="absolute top-[-8%] left-[-5%] w-[420px] h-[420px] bg-[#A78BFA] rounded-full opacity-20 blur-[100px]" />
-      <div className="absolute top-[30%] right-[-8%] w-[450px] h-[450px] bg-[#38BDF8] rounded-full opacity-15 blur-[110px]" />
-      <div className="absolute bottom-[-8%] left-[10%] w-[500px] h-[500px] bg-[#C084FC] rounded-full opacity-15 blur-[120px]" />
+      {/* Mobile-optimized Radial Gradient (Zero GPU filter cost on mobile) */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(167,139,250,0.18),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(56,189,248,0.15),transparent_50%)] sm:hidden pointer-events-none" />
+
+      {/* Desktop Blur Blobs (Only rendered on desktop for smooth mobile scrolling) */}
+      <div className="hidden sm:block absolute top-[-8%] left-[-5%] w-[420px] h-[420px] bg-[#A78BFA] rounded-full opacity-20 blur-[100px]" />
+      <div className="hidden sm:block absolute top-[30%] right-[-8%] w-[450px] h-[450px] bg-[#38BDF8] rounded-full opacity-15 blur-[110px]" />
+      <div className="hidden sm:block absolute bottom-[-8%] left-[10%] w-[500px] h-[500px] bg-[#C084FC] rounded-full opacity-15 blur-[120px]" />
 
       {/* Subtle Sunburst / Flowerline Art */}
       <svg className="absolute -top-12 -left-12 w-80 h-80 opacity-10 text-white stroke-current" viewBox="0 0 100 100" fill="none">

@@ -57,7 +57,7 @@ export default function ReadingList() {
                 transition={{ delay: index * 0.08 }}
               >
                 <Link to={`/reading/${story.id}`} className="group block outline-none">
-                  <div className={`bg-gradient-to-r ${style.bg} px-4 py-3.5 rounded-2xl text-white shadow-lg ${style.shadow} flex items-center justify-between transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden border border-white/10`}>
+                  <div className={`bg-gradient-to-r ${style.bg} px-4 py-3.5 rounded-2xl text-white shadow-md sm:shadow-lg ${style.shadow} flex items-center justify-between transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 relative overflow-hidden border border-white/10 will-change-transform`}>
                     
                     {/* Polka Dot Texture Overlay */}
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>

@@ -49,14 +49,18 @@ function LandingPage() {
           <div className="relative">
             {/* Soft Glow behind Mascot */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/40 rounded-full blur-2xl -z-10"></div>
-            <img 
-              src="/mascot/raccoon-host.png" 
-              alt="Raccly Raccoon Mascot" 
-              className="w-32 md:w-36 h-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
-              onError={(e) => {
-                e.target.src = 'https://placehold.co/400x400/transparent/transparent.png';
-              }}
-            />
+            <picture>
+              <source srcset="/mascot/raccoon-host.webp" type="image/webp" />
+              <img 
+                src="/mascot/raccoon-host.png" 
+                alt="Raccly Raccoon Mascot" 
+                decoding="async"
+                className="w-32 md:w-36 h-auto drop-shadow-md sm:drop-shadow-xl hover:scale-105 transition-transform duration-300"
+                onError={(e) => {
+                  e.target.src = 'https://placehold.co/400x400/transparent/transparent.png';
+                }}
+              />
+            </picture>
           </div>
         </motion.div>
 
@@ -131,7 +135,7 @@ function NavCard({ to, icon, title, description, badge, bgGradient, shadowColor 
       <motion.div 
         whileHover={{ scale: 1.02, y: -3 }}
         whileTap={{ scale: 0.98 }}
-        className={`bg-gradient-to-r ${bgGradient} px-4 py-3 rounded-2xl text-white shadow-lg ${shadowColor} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
+        className={`bg-gradient-to-r ${bgGradient} px-4 py-3 rounded-2xl text-white shadow-md sm:shadow-lg ${shadowColor} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10 will-change-transform`}
       >
         {/* Polka Dot Texture Overlay */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>

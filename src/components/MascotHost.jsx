@@ -48,17 +48,24 @@ export default function MascotHost() {
             <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-white/95 rotate-45 border-r border-b border-indigo-100/80 -z-10"></div>
           </motion.div>
 
-          {/* Mascot Image */}
-          <motion.img
-            src="/mascot/raccoon-host.png"
-            alt="EnglisHeu Host"
-            className="w-14 sm:w-16 md:w-22 h-auto drop-shadow-xl pointer-events-auto hover:scale-110 transition-transform duration-300 origin-bottom"
-            animate={isBouncing ? { y: [0, -12, 0] } : { y: 0 }}
-            transition={isBouncing ? { duration: 0.4, ease: "easeInOut", repeat: 1 } : {}}
-            onError={(e) => {
-              e.target.src = 'https://placehold.co/200x200/transparent/transparent.png';
-            }}
-          />
+          {/* Mascot Image with WebP format & lazy loading */}
+          <div className="relative pointer-events-auto hover:scale-105 transition-transform duration-300 origin-bottom will-change-transform">
+            <picture>
+              <source srcset="/mascot/raccoon-host.webp" type="image/webp" />
+              <motion.img
+                src="/mascot/raccoon-host.png"
+                alt="EnglisHeu Host"
+                loading="lazy"
+                decoding="async"
+                className="w-14 sm:w-16 md:w-20 h-auto drop-shadow-lg"
+                animate={isBouncing ? { y: [0, -10, 0] } : { y: 0 }}
+                transition={isBouncing ? { duration: 0.4, ease: "easeInOut", repeat: 1 } : {}}
+                onError={(e) => {
+                  e.target.src = 'https://placehold.co/200x200/transparent/transparent.png';
+                }}
+              />
+            </picture>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
