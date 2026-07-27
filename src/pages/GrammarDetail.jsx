@@ -122,7 +122,7 @@ export default function GrammarDetail() {
             <div className="h-0.5 bg-white/40 flex-grow"></div>
           </div>
 
-          <GrammarExercise exercises={topic.exercises} />
+          <GrammarExercise topicId={topic.id} exercises={topic.exercises} />
         </motion.div>
       </main>
     </div>

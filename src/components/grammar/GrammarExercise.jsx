@@ -4,13 +4,14 @@ import { CheckCircle, XCircle, Trophy, RefreshCcw, ArrowRight } from 'lucide-rea
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useMascot } from '../../contexts/MascotContext';
 
-export default function GrammarExercise({ exercises }) {
+export default function GrammarExercise({ topicId, exercises }) {
   const { setMascotMessage } = useMascot();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isFinished, setIsFinished] = useState(false);
   const [grammarScores, setGrammarScores] = useLocalStorage('raccly_grammar_scores', []);
+  const [completedTopics, setCompletedTopics] = useLocalStorage('raccly_grammar_completed', {});
 
   if (!exercises || exercises.length === 0) {
     return <div className="p-6 bg-white/80 rounded-2xl text-center text-slate-500 font-medium">Belum ada latihan untuk topik ini.</div>;
@@ -39,6 +40,9 @@ export default function GrammarExercise({ exercises }) {
       setIsFinished(true);
       const finalScorePct = Math.round((score / exercises.length) * 100);
       setGrammarScores([...grammarScores, finalScorePct]);
+      if (topicId) {
+        setCompletedTopics(prev => ({ ...prev, [topicId]: true }));
+      }
       setMascotMessage(`Latihan Grammar Selesai! Skor kamu ${score}/${exercises.length}! 🏆`);
     }
   };
