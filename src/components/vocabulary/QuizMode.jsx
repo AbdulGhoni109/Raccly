@@ -51,7 +51,7 @@ export default function QuizMode({ vocabList, onBack }) {
 
   if (!vocabList || vocabList.length < 4) {
     return (
-      <div className="text-center p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-white/40 shadow-sm max-w-md mx-auto">
+      <div className="text-center p-8 bg-white/80 sm:backdrop-blur-md rounded-3xl border border-white/40 shadow-sm max-w-md mx-auto">
         <p className="text-indigo-950 font-bold">Perlu minimal 4 kata dalam kelompok ini untuk memulai Kuis Pilihan Ganda.</p>
       </div>
     );
@@ -93,7 +93,7 @@ export default function QuizMode({ vocabList, onBack }) {
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} 
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 max-w-md mx-auto text-center"
+        className="bg-white/90 sm:backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 max-w-md mx-auto text-center"
       >
         <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/30">
           <Trophy className="w-10 h-10" />
@@ -158,7 +158,7 @@ export default function QuizMode({ vocabList, onBack }) {
       </div>
 
       {/* Question Card */}
-      <div className="bg-white/90 backdrop-blur-md px-6 py-5 sm:p-8 rounded-[2.5rem] shadow-xl border border-white/80 text-center mb-4 relative overflow-hidden">
+      <div className="bg-white/90 sm:backdrop-blur-md px-6 py-5 sm:p-8 rounded-[2.5rem] shadow-xl border border-white/80 text-center mb-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
         <span className="text-xs font-extrabold text-indigo-500 uppercase tracking-widest bg-indigo-100/80 px-3 py-1 rounded-full mb-3 inline-block">
@@ -181,7 +181,7 @@ export default function QuizMode({ vocabList, onBack }) {
           const isSelectedOption = option === selectedAnswer;
           const hasAnswered = selectedAnswer !== null;
 
-          let optionStyle = "bg-white/80 backdrop-blur-md border-white/80 text-slate-800 hover:bg-white hover:border-indigo-300 hover:scale-[1.01]";
+          let optionStyle = "bg-white/80 sm:backdrop-blur-md border-white/80 text-slate-800 hover:bg-white hover:border-indigo-300 hover:scale-[1.01]";
           let icon = null;
 
           if (hasAnswered) {

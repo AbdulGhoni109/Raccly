@@ -220,7 +220,7 @@ function WarningMistakesCard({ title, lines }) {
 function FunctionsGridView({ title, introText, items }) {
   return (
     <div
-      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
+      className="bg-white/90 sm:backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-4 pb-3 border-b border-indigo-50">
@@ -374,7 +374,7 @@ function CollapsibleSection({ title, iconEmoji, lines, defaultOpen = false }) {
 
   return (
     <div
-      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8 overflow-hidden"
+      className="bg-white/90 sm:backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8 overflow-hidden"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -424,7 +424,7 @@ function RingkasCardWrapper({ title, iconEmoji, children }) {
 
   return (
     <div
-      className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-4 overflow-hidden"
+      className="bg-white/90 sm:backdrop-blur-md rounded-3xl border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-4 overflow-hidden"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -504,7 +504,7 @@ function StandardLinesRenderer({ lines }) {
 function StandardCardView({ title, iconEmoji, lines }) {
   return (
     <div
-      className="bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
+      className="bg-white/90 sm:backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/80 shadow-md sm:shadow-lg shadow-purple-900/5 mb-8"
     >
       <div className="flex items-center gap-3 mb-5 pb-3 border-b border-indigo-50">
         <div className="w-10 h-10 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-md flex-shrink-0">

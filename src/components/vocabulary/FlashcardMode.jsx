@@ -204,7 +204,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
 
         {/* Contoh Kalimat — always visible below card */}
         {currentVocab.example && (
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/70 shadow-md px-4 py-3">
+          <div className="bg-white/80 sm:backdrop-blur-md rounded-2xl border border-white/70 shadow-md px-4 py-3">
             <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Contoh kalimat</span>
             <p className="text-slate-600 text-xs font-medium italic leading-relaxed">
               "{currentVocab.example}"
@@ -221,7 +221,7 @@ export default function FlashcardMode({ vocabList, onBack }) {
           className={`w-full py-2.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2.5 transition-all duration-200 border shadow-md active:scale-95 ${
             isCurrentMastered
               ? 'bg-emerald-500 text-white border-emerald-600 shadow-emerald-500/20 hover:bg-emerald-600'
-              : 'bg-white/90 backdrop-blur-md text-slate-700 border-white hover:bg-white shadow-indigo-950/5'
+              : 'bg-white/90 sm:backdrop-blur-md text-slate-700 border-white hover:bg-white shadow-indigo-950/5'
           }`}
         >
           <span

@@ -32,7 +32,7 @@ export default function ReadingList() {
 
       {/* Header */}
       <header className="max-w-3xl mx-auto mb-4 flex items-center gap-3">
-        <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0">
+        <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0">
           <ArrowLeft className="w-4 h-4 mr-1.5" />
           Beranda
         </Link>
@@ -63,14 +63,14 @@ export default function ReadingList() {
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
                     <div className="flex items-center gap-3 relative z-10 min-w-0 pr-2">
-                      <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="bg-white/20 sm:backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
                         <FileText className="w-5 h-5 text-white" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="text-sm sm:text-base font-bold text-white leading-tight truncate">{story.title}</h3>
                           {isRead && (
-                            <span className="flex items-center px-2 py-0.5 bg-emerald-400/30 backdrop-blur-md text-white text-[10px] font-bold rounded-full border border-emerald-300/40 flex-shrink-0">
+                            <span className="flex items-center px-2 py-0.5 bg-emerald-400/30 sm:backdrop-blur-md text-white text-[10px] font-bold rounded-full border border-emerald-300/40 flex-shrink-0">
                               <CheckCircle2 className="w-3 h-3 mr-1" /> Selesai
                             </span>
                           )}

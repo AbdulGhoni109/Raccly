@@ -32,7 +32,7 @@ export default function GrammarDetail() {
 
       <header className="max-w-4xl mx-auto mb-4 md:mb-6 flex flex-col md:flex-row items-center justify-between gap-3 relative">
         <div className="w-full md:w-auto flex items-center justify-start">
-          <Link to="/grammar" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
+          <Link to="/grammar" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
             <ArrowLeft className="w-4 h-4 mr-1.5" />
             Daftar Topik
           </Link>
@@ -47,7 +47,7 @@ export default function GrammarDetail() {
 
       {/* View Mode Toggle */}
       <div className="max-w-4xl mx-auto mb-6 flex justify-center">
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-1 flex items-center gap-1 border border-white/60 shadow-sm">
+        <div className="bg-white/80 sm:backdrop-blur-md rounded-2xl p-1 flex items-center gap-1 border border-white/60 shadow-sm">
           <button
             onClick={() => setViewMode('ringkas')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold transition-all duration-200 ${
@@ -91,7 +91,7 @@ export default function GrammarDetail() {
 
           {/* Contoh Kalimat Ringkasan */}
           {topic.examples && topic.examples.length > 0 && (
-            <div className="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/80 mb-12">
+            <div className="bg-white/90 sm:backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/80 mb-12">
               <h2 className="flex items-center text-xl font-black text-indigo-950 mb-6">
                 <div className="p-2.5 bg-purple-600 text-white rounded-2xl mr-3 shadow-md">
                   <List className="w-5 h-5" />

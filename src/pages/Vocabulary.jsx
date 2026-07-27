@@ -230,14 +230,14 @@ export default function Vocabulary() {
       {(!selectedMode || !selectedCategory) && (
         <header className="max-w-4xl mx-auto mb-4 flex items-center gap-3">
           {!selectedMode ? (
-            <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0">
+            <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0">
               <ArrowLeft className="w-4 h-4 mr-1.5" />
               Beranda
             </Link>
           ) : (
             <button 
               onClick={() => setSelectedMode(null)} 
-              className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0"
+              className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs flex-shrink-0"
             >
               <ChevronLeft className="w-4 h-4 mr-1" />
               Ganti Mode
@@ -284,7 +284,7 @@ export default function Vocabulary() {
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
                     <div className="flex items-center gap-3 relative z-10">
-                      <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="bg-white/20 sm:backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
                         {mode.icon}
                       </div>
                       <div>
@@ -293,7 +293,7 @@ export default function Vocabulary() {
                       </div>
                     </div>
 
-                    <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
+                    <div className="w-7 h-7 rounded-full bg-white/20 sm:backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
                       <ChevronRight className="w-4 h-4 text-white" />
                     </div>
                   </motion.div>
@@ -332,7 +332,7 @@ export default function Vocabulary() {
                         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
 
                         <div className="flex items-center gap-3 relative z-10 min-w-0">
-                          <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <div className="bg-white/20 sm:backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
                             {React.cloneElement(cat.icon, { className: 'w-5 h-5 text-white' })}
                           </div>
                           <div className="min-w-0">

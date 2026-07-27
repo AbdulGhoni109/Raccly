@@ -40,7 +40,7 @@ export default function MascotHost() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.3 }}
-            className="bg-white/95 backdrop-blur-md p-2.5 md:p-3.5 rounded-2xl shadow-lg border border-indigo-100/80 mb-1.5 max-w-[130px] sm:max-w-[160px] md:max-w-[200px] text-center relative pointer-events-auto"
+            className="bg-white/95 sm:backdrop-blur-md p-2.5 md:p-3.5 rounded-2xl shadow-lg border border-indigo-100/80 mb-1.5 max-w-[130px] sm:max-w-[160px] md:max-w-[200px] text-center relative pointer-events-auto"
             style={{ borderBottomRightRadius: '4px' }}
           >
             <p className="text-indigo-950 font-extrabold text-[11px] md:text-xs leading-tight md:leading-relaxed">{message}</p>

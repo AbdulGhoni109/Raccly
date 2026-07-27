@@ -80,7 +80,7 @@ export default function ReadingDetail() {
 
       <header className="max-w-3xl mx-auto mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-3 relative">
         <div className="w-full md:w-auto flex items-center justify-start">
-          <Link to="/reading" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
+          <Link to="/reading" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
             <ArrowLeft className="w-4 h-4 mr-1.5" />
             Daftar Cerita
           </Link>
@@ -100,7 +100,7 @@ export default function ReadingDetail() {
           transition={{ duration: 0.4 }}
         >
           
-          <div className="bg-white/90 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/60 mb-6 leading-relaxed text-lg text-slate-800 font-medium">
+          <div className="bg-white/90 sm:backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl shadow-purple-900/5 border border-white/60 mb-6 leading-relaxed text-lg text-slate-800 font-medium">
             <p>
               {renderContent(story.content, story.highlightedWords)}
             </p>
@@ -111,7 +111,7 @@ export default function ReadingDetail() {
             <div className="mb-8">
               <button
                 onClick={() => setShowTranslation(!showTranslation)}
-                className="w-full bg-white/80 hover:bg-white backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/60 shadow-sm flex items-center justify-between text-indigo-950 font-bold text-sm transition-all duration-200 active:scale-[0.99]"
+                className="w-full bg-white/80 hover:bg-white sm:backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/60 shadow-sm flex items-center justify-between text-indigo-950 font-bold text-sm transition-all duration-200 active:scale-[0.99]"
               >
                 <div className="flex items-center gap-2.5">
                   <Languages className="w-5 h-5 text-indigo-600" />
@@ -131,7 +131,7 @@ export default function ReadingDetail() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-3 bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-indigo-100 shadow-md leading-relaxed text-base text-slate-700 font-medium">
+                    <div className="mt-3 bg-white/90 sm:backdrop-blur-md p-6 md:p-8 rounded-2xl border border-indigo-100 shadow-md leading-relaxed text-base text-slate-700 font-medium">
                       <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest block mb-2 flex items-center gap-1">
                         🇮🇩 Terjemahan Bahasa Indonesia
                       </span>
@@ -148,7 +148,7 @@ export default function ReadingDetail() {
           {/* Moral Quote Card */}
           <div className="bg-gradient-to-r from-[#F59E0B] to-[#D97706] p-6 md:p-8 rounded-3xl text-white shadow-xl shadow-amber-500/25 mb-12 flex items-start relative overflow-hidden border border-white/10">
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
-            <div className="bg-white/20 backdrop-blur-md p-3.5 rounded-2xl border border-white/20 text-white mr-5 flex-shrink-0 relative z-10">
+            <div className="bg-white/20 sm:backdrop-blur-md p-3.5 rounded-2xl border border-white/20 text-white mr-5 flex-shrink-0 relative z-10">
               <Lightbulb className="w-6 h-6" />
             </div>
             <div className="relative z-10">

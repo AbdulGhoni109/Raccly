@@ -58,10 +58,11 @@ export default function SwipeMode({ vocabList, onBack }) {
     if (isUserCorrect) {
       newScore = score + 1;
       setScore(newScore);
-      setVocabProgress({ ...vocabProgress, [current.wordObj.id]: true });
+      // Use functional updater — avoids closing over stale 865-entry object every swipe
+      setVocabProgress(prev => ({ ...prev, [current.wordObj.id]: true }));
       setMascotMessage("Keren banget! Pemahamanmu tentang kata ini tepat! 🎉");
     } else {
-      setVocabProgress({ ...vocabProgress, [current.wordObj.id]: false });
+      setVocabProgress(prev => ({ ...prev, [current.wordObj.id]: false }));
       setMascotMessage(`Kurang tepat! Arti aslinya: "${current.wordObj.meaning}" 💪`);
     }
 
@@ -110,7 +111,7 @@ export default function SwipeMode({ vocabList, onBack }) {
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} 
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 max-w-md mx-auto text-center relative overflow-hidden"
+        className="bg-white/90 sm:backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 max-w-md mx-auto text-center relative overflow-hidden"
       >
         <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/30">
           <Trophy className="w-10 h-10" />
@@ -187,7 +188,7 @@ export default function SwipeMode({ vocabList, onBack }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              className={`absolute inset-0 z-30 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center shadow-2xl backdrop-blur-md ${
+              className={`absolute inset-0 z-30 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center shadow-2xl sm:backdrop-blur-md ${
                 feedback.isCorrect ? 'bg-emerald-600/95 text-white' : 'bg-rose-600/95 text-white'
               }`}
             >
@@ -260,7 +261,7 @@ export default function SwipeMode({ vocabList, onBack }) {
           </div>
 
           {/* Lower Displayed Meaning Box */}
-          <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-indigo-100 shadow-md text-center relative z-10">
+          <div className="bg-white/95 sm:backdrop-blur-md p-4 rounded-2xl border border-indigo-100 shadow-md text-center relative z-10">
             <div className="inline-flex items-center gap-1 bg-indigo-600 text-white text-[9px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full mb-1">
               <Sparkles className="w-3 h-3 text-indigo-200" />
               <span>Apakah artinya ini?</span>

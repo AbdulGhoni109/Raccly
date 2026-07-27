@@ -56,7 +56,7 @@ export default function GrammarExercise({ exercises }) {
     return (
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-        className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 text-center max-w-md mx-auto"
+        className="bg-white/90 sm:backdrop-blur-md p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/60 text-center max-w-md mx-auto"
       >
         <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/30">
           <Trophy className="w-10 h-10" />
@@ -82,7 +82,7 @@ export default function GrammarExercise({ exercises }) {
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-[2.5rem] shadow-xl border border-white/80">
+    <div className="bg-white/90 sm:backdrop-blur-md p-6 md:p-8 rounded-[2.5rem] shadow-xl border border-white/80">
       <div className="flex justify-between items-center mb-6">
         <span className="text-xs font-extrabold text-indigo-950 bg-indigo-100/80 px-3 py-1.5 rounded-full border border-indigo-200">
           Soal {currentIndex + 1} dari {exercises.length}

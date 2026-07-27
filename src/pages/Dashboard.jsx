@@ -48,7 +48,7 @@ export default function Dashboard() {
 
       <header className="max-w-4xl mx-auto mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-3 relative">
         <div className="w-full md:w-auto flex items-center justify-start">
-          <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
+          <Link to="/" className="inline-flex items-center text-indigo-900 font-bold bg-white/80 sm:backdrop-blur-md px-3.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm hover:bg-white transition-all border border-white/40 text-xs md:text-sm">
             <ArrowLeft className="w-4 h-4 mr-1.5" />
             Beranda
           </Link>
@@ -75,7 +75,7 @@ export default function Dashboard() {
           >
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
             <div className="flex items-center justify-between mb-6 relative z-10">
-              <div className="bg-white/20 backdrop-blur-md p-3.5 rounded-2xl border border-white/20">
+              <div className="bg-white/20 sm:backdrop-blur-md p-3.5 rounded-2xl border border-white/20">
                 <CheckCircle2 className="w-6 h-6 text-white" />
               </div>
               <span className="text-4xl font-black text-white">{masteredVocabCount}<span className="text-xl text-white/70 font-medium">/{totalVocabCount}</span></span>
@@ -101,7 +101,7 @@ export default function Dashboard() {
           >
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
             <div className="flex items-center justify-between mb-6 relative z-10">
-              <div className="bg-white/20 backdrop-blur-md p-3.5 rounded-2xl border border-white/20">
+              <div className="bg-white/20 sm:backdrop-blur-md p-3.5 rounded-2xl border border-white/20">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <span className="text-4xl font-black text-white">{readStoriesCount}<span className="text-xl text-white/70 font-medium">/{totalStoriesCount}</span></span>
