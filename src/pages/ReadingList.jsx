@@ -288,33 +288,26 @@ export default function ReadingList() {
                         )}
                       </div>
 
-                      {/* Main Title & Emoji */}
-                      <div className="flex items-start gap-3 mb-2">
-                        <div className="w-10 h-10 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform">
-                          {meta.emoji}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-base sm:text-lg font-black text-indigo-950 group-hover:text-purple-700 transition-colors leading-tight">
-                            {story.title}
-                          </h3>
-                          <p className="text-slate-600 text-xs sm:text-sm font-medium mt-1 leading-relaxed">
-                            {meta.summary}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Supportive Quote Banner */}
-                      {story.quote && (
-                        <div className="mt-3 pt-3 border-t border-purple-100/70 flex items-center justify-between gap-3">
-                          <p className="text-xs italic font-medium text-purple-900/80 leading-relaxed flex items-center gap-1.5">
-                            <span className="text-base leading-none not-italic">💬</span>
-                            <span>"{story.quote}"</span>
-                          </p>
-                          <div className="w-7 h-7 rounded-full bg-purple-100/80 group-hover:bg-purple-600 group-hover:text-white text-purple-700 flex items-center justify-center flex-shrink-0 transition-colors">
-                            <ChevronRight className="w-4 h-4" />
+                      {/* Main Title, Summary & Action Arrow */}
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-start gap-3 min-w-0 flex-1">
+                          <div className="w-10 h-10 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                            {meta.emoji}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="text-base sm:text-lg font-black text-indigo-950 group-hover:text-purple-700 transition-colors leading-tight">
+                              {story.title}
+                            </h3>
+                            <p className="text-slate-600 text-xs sm:text-sm font-medium mt-1 leading-relaxed">
+                              {meta.summary}
+                            </p>
                           </div>
                         </div>
-                      )}
+
+                        <div className="w-7 h-7 rounded-full bg-purple-100/80 group-hover:bg-purple-600 group-hover:text-white text-purple-700 flex items-center justify-center flex-shrink-0 transition-colors">
+                          <ChevronRight className="w-4 h-4" />
+                        </div>
+                      </div>
 
                     </div>
                   </Link>
