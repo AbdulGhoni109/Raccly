@@ -36,12 +36,25 @@ import { useMascot } from '../contexts/MascotContext';
 
 import BackgroundClouds from '../components/BackgroundClouds';
 
+const DAILY_TIPS = [
+  { tip: "Don't just memorize — use the word in a sentence today!", emoji: "✍️" },
+  { tip: "Learning 3 new words a day = 1,000+ words in a year.", emoji: "📈" },
+  { tip: "Say the word out loud. Your mouth remembers too!", emoji: "🗣️" },
+  { tip: "Try to use a new word when texting a friend today.", emoji: "💬" },
+  { tip: "Review yesterday's words before learning new ones.", emoji: "🔁" },
+  { tip: "Context helps memory — read the example sentence carefully.", emoji: "📖" },
+  { tip: "Mastering 5 categories already? You're ahead of the curve!", emoji: "🏆" },
+];
+
 export default function Vocabulary() {
   const { setMascotMessage } = useMascot();
   const [vocabProgress] = useLocalStorage('raccly_vocab_progress', {});
 
   const [selectedMode, setSelectedMode] = useState(null); // 'flashcard' | 'swipe' | 'quiz' | null
   const [selectedCategory, setSelectedCategory] = useState(null); // string | null
+
+  // Pick a stable daily tip (changes by day, not by render)
+  const dailyTip = DAILY_TIPS[new Date().getDate() % DAILY_TIPS.length];
 
   useEffect(() => {
     if (!selectedMode) {
@@ -57,26 +70,69 @@ export default function Vocabulary() {
     { 
       id: 'flashcard', 
       title: 'Flashcard Mode', 
-      description: 'Hafal kosakata dengan kartu flip interaktif',
-      icon: <Layers className="w-5 h-5 text-white" />,
+      description: 'Flip kartu, lihat artinya, tandai yang sudah kamu kuasai',
+      tagline: 'Best for building memory',
+      icon: (
+        <div className="relative w-10 h-8">
+          <div className="w-8 h-6 bg-white/30 rounded-md border border-white/40 absolute top-0 left-0 rotate-[-8deg]" />
+          <div className="w-8 h-6 bg-white/20 rounded-md border border-white/30 absolute top-0.5 left-0.5 rotate-[-4deg]" />
+          <div className="w-8 h-6 bg-white/90 rounded-md flex items-center justify-center absolute top-1 left-1 shadow-sm">
+            <span className="text-indigo-600 font-black text-xs">A</span>
+          </div>
+        </div>
+      ),
+      badge: '⭐ Recommended',
+      badgeBg: 'bg-yellow-400/90 text-yellow-900',
       gradient: 'from-[#6366F1] to-[#4F46E5]',
-      shadow: 'shadow-indigo-500/25'
+      shadow: 'shadow-indigo-500/25',
+      accent: 'bg-indigo-400/20',
     },
     { 
       id: 'swipe', 
       title: 'Swipe Game', 
-      description: 'Geser kanan jika tahu, kiri jika belum',
-      icon: <Hand className="w-5 h-5 text-white" />,
+      description: 'Geser kanan kalau tahu artinya, kiri kalau belum — cepat & seru!',
+      tagline: 'Best for quick review',
+      icon: (
+        <div className="flex items-center gap-1">
+          <span className="text-lg leading-none">👈</span>
+          <div className="w-5 h-7 bg-white/80 rounded-md border border-white/40 shadow-sm flex items-center justify-center mx-0.5">
+            <span className="text-rose-500 font-black text-[9px]">Aa</span>
+          </div>
+          <span className="text-lg leading-none">👉</span>
+        </div>
+      ),
+      badge: '🎮 Playful',
+      badgeBg: 'bg-white/20 text-white',
       gradient: 'from-[#F43F5E] to-[#E11D48]',
-      shadow: 'shadow-rose-500/25'
+      shadow: 'shadow-rose-500/25',
+      accent: 'bg-rose-400/20',
     },
     { 
       id: 'quiz', 
       title: 'Multiple Choice Quiz', 
-      description: 'Uji pemahaman dengan 4 pilihan jawaban',
-      icon: <HelpCircle className="w-5 h-5 text-white" />,
+      description: 'Pilih 1 dari 4 jawaban — uji seberapa dalam kamu memahami kata',
+      tagline: 'Best for exam prep',
+      icon: (
+        <div className="space-y-1 w-10">
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-full border border-white/60 flex-shrink-0" />
+            <div className="h-1.5 bg-white/40 rounded flex-1" />
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-full bg-white flex-shrink-0" />
+            <div className="h-1.5 bg-white/80 rounded flex-1" />
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-full border border-white/60 flex-shrink-0" />
+            <div className="h-1.5 bg-white/40 rounded flex-1" />
+          </div>
+        </div>
+      ),
+      badge: '🎯 Academic',
+      badgeBg: 'bg-white/20 text-white',
       gradient: 'from-[#F59E0B] to-[#D97706]',
-      shadow: 'shadow-amber-500/25'
+      shadow: 'shadow-amber-500/25',
+      accent: 'bg-amber-400/20',
     },
   ];
 
@@ -179,7 +235,6 @@ export default function Vocabulary() {
     }
   };
 
-  // Pre-calculate stats per category in a single pass O(N) instead of O(N*C) filter per render
   const categoryStats = React.useMemo(() => {
     const stats = {};
     for (let i = 0; i < vocabularyData.length; i++) {
@@ -213,20 +268,36 @@ export default function Vocabulary() {
 
   const getActiveModeObj = () => modes.find(m => m.id === selectedMode);
 
-  // Filtered vocabulary list for Step 3 (memoized to keep reference stable)
   const filteredVocab = React.useMemo(() => {
     return selectedCategory 
       ? vocabularyData.filter(v => v.category === selectedCategory)
       : [];
   }, [selectedCategory]);
 
+  const totalWords = vocabularyData.length;
+  const masteredWords = React.useMemo(
+    () => Object.values(vocabProgress).filter(Boolean).length,
+    [vocabProgress]
+  );
+  const masteredPct = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
+
+  const progressLabel = masteredPct === 0
+    ? "Mulai perjalananmu hari ini! 🚀"
+    : masteredPct < 25
+    ? "Awal yang bagus, terus semangat! 💪"
+    : masteredPct < 50
+    ? "Sedikit lagi sampai setengahnya! 🔥"
+    : masteredPct < 75
+    ? "Lebih dari separuh — luar biasa! ⭐"
+    : masteredPct < 100
+    ? "Hampir selesai, kamu keren banget! 🏆"
+    : "Semua kata dikuasai! Legend! 🎉";
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#D8C7FF] via-[#E2DCFF] to-[#D0EAFF] text-slate-800 p-4 sm:p-6 md:p-10 relative z-0 overflow-hidden">
       
-      {/* Background Watermark & Clouds */}
       <BackgroundClouds />
 
-      {/* Header & Navigation — Only shown when NOT in active exercise mode */}
       {(!selectedMode || !selectedCategory) && (
         <header className="max-w-4xl mx-auto mb-4 flex items-center gap-3">
           {!selectedMode ? (
@@ -244,7 +315,6 @@ export default function Vocabulary() {
             </button>
           )}
 
-          {/* Breadcrumb */}
           <div className="text-[10px] font-extrabold text-purple-900/50 flex items-center gap-1 uppercase tracking-wider min-w-0 overflow-hidden">
             <span className="truncate">Vocab</span>
             {selectedMode && (
@@ -260,7 +330,6 @@ export default function Vocabulary() {
       <main className="max-w-4xl mx-auto pb-8">
         <AnimatePresence mode="wait">
           
-          {/* STEP 1 — Pilih Mode */}
           {!selectedMode && (
             <motion.div
               key="step-1"
@@ -268,41 +337,114 @@ export default function Vocabulary() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="space-y-2.5 max-w-2xl mx-auto"
+              className="max-w-2xl mx-auto"
             >
-              {modes.map((mode) => (
-                <button
-                  key={mode.id}
-                  onClick={() => setSelectedMode(mode.id)}
-                  className="group block w-full outline-none text-left"
-                >
-                  <motion.div 
-                    whileHover={{ scale: 1.02, y: -3 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`bg-gradient-to-r ${mode.gradient} px-4 py-3.5 rounded-2xl text-white shadow-md sm:shadow-lg ${mode.shadow} flex items-center justify-between cursor-pointer relative overflow-hidden transition-all duration-300 border border-white/10`}
-                  >
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mb-5"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h1 className="text-2xl md:text-3xl font-black text-indigo-950 leading-tight">
+                      📚 Vocabulary
+                    </h1>
+                    <p className="text-purple-800/80 font-semibold text-sm mt-0.5">
+                      {vocabularyData.length}+ Words · 3 Learning Modes · {Object.keys(categoryConfig).length} Categories
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 bg-white/70 sm:backdrop-blur-md rounded-2xl px-3 py-2 border border-white/60 shadow-sm text-center min-w-[72px]">
+                    <div className="text-xl font-black text-indigo-700 leading-none">{masteredWords}</div>
+                    <div className="text-[10px] text-indigo-500 font-bold mt-0.5">dikuasai</div>
+                  </div>
+                </div>
 
-                    <div className="flex items-center gap-3 relative z-10">
-                      <div className="bg-white/20 sm:backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                <div className="mt-3 bg-white/40 rounded-2xl p-3 border border-white/50">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-indigo-900/70">{progressLabel}</span>
+                    <span className="text-xs font-black text-indigo-700">{masteredPct}%</span>
+                  </div>
+                  <div className="w-full bg-white/50 rounded-full h-2 overflow-hidden">
+                    <motion.div
+                      className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${masteredPct}%` }}
+                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    />
+                  </div>
+                  <div className="flex justify-between mt-1">
+                    <span className="text-[10px] text-indigo-700/60 font-medium">0</span>
+                    <span className="text-[10px] text-indigo-700/60 font-medium">{masteredWords} / {totalWords}</span>
+                    <span className="text-[10px] text-indigo-700/60 font-medium">{totalWords}</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              <p className="text-xs font-extrabold text-purple-900/50 uppercase tracking-widest mb-2.5 px-0.5">
+                Choose your learning style today
+              </p>
+
+              <div className="space-y-2.5">
+                {modes.map((mode, idx) => (
+                  <motion.button
+                    key={mode.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.07 }}
+                    onClick={() => setSelectedMode(mode.id)}
+                    className="group block w-full outline-none text-left"
+                  >
+                    <motion.div 
+                      whileHover={{ scale: 1.02, y: -3 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`bg-gradient-to-r ${mode.gradient} px-4 py-4 rounded-2xl text-white shadow-md sm:shadow-lg ${mode.shadow} flex items-center gap-4 cursor-pointer relative overflow-hidden transition-shadow duration-300 border border-white/10`}
+                    >
+                      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none" />
+
+                      <div className={`${mode.accent} p-3 rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/20 group-hover:scale-110 transition-transform duration-200 min-w-[56px] min-h-[56px]`}>
                         {mode.icon}
                       </div>
-                      <div>
-                        <h3 className="text-base font-bold text-white leading-tight">{mode.title}</h3>
-                        <p className="text-white/80 text-xs font-medium mt-0.5">{mode.description}</p>
-                      </div>
-                    </div>
 
-                    <div className="w-7 h-7 rounded-full bg-white/20 sm:backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
-                      <ChevronRight className="w-4 h-4 text-white" />
-                    </div>
-                  </motion.div>
-                </button>
-              ))}
+                      <div className="flex-1 min-w-0 relative z-10">
+                        <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                          <h3 className="text-base font-black text-white leading-tight">{mode.title}</h3>
+                          <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${mode.badgeBg} border border-white/20`}>
+                            {mode.badge}
+                          </span>
+                        </div>
+                        <p className="text-white/80 text-xs font-medium leading-snug">{mode.description}</p>
+                        <p className="text-white/50 text-[10px] font-bold mt-1 uppercase tracking-wide">{mode.tagline}</p>
+                      </div>
+
+                      <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform border border-white/20 relative z-10">
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </div>
+                    </motion.div>
+                  </motion.button>
+                ))}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.35 }}
+                className="mt-5 bg-white/50 border border-white/70 rounded-2xl p-4 flex items-start gap-3 shadow-sm"
+              >
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <span className="text-base">🦝</span>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-extrabold text-purple-700/60 uppercase tracking-widest mb-0.5">Tip of the Day</p>
+                  <p className="text-indigo-950 font-semibold text-sm leading-snug">
+                    <span className="mr-1">{dailyTip.emoji}</span>
+                    {dailyTip.tip}
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
           )}
 
-          {/* STEP 2 — Pilih Kelompok */}
           {selectedMode && !selectedCategory && (
             <motion.div
               key="step-2"
@@ -358,7 +500,6 @@ export default function Vocabulary() {
 
           )}
 
-          {/* STEP 3 — Mode Latihan */}
           {selectedMode && selectedCategory && (
             <motion.div
               key="step-3"
