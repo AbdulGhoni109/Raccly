@@ -39,7 +39,7 @@ export default function ReadingQuiz({ questions, storyId }) {
     } else {
       setIsFinished(true);
       setMascotMessage("Cerita selesai dibaca & kuis tuntas! Selamat! 🏆");
-      setReadStories({ ...readStories, [storyId]: true });
+      setReadStories(prev => ({ ...prev, [storyId]: true }));
     }
   };
 
